@@ -3,7 +3,7 @@
         <ul class="list-group shadow">
           <li class="list-group-item active">
             Courses</li>
-          <li class="list-group-item webdev"
+          <li class="list-group-item course"
               *ngFor="let course of courses"
               (click)="selectCourse(course.id)"
               [ngClass]="{'active': course.id === selectedCourseId}">
@@ -14,8 +14,10 @@
         <ul class="list-group shadow">
           <li class="list-group-item active">
             Modules</li>
-          <li class="list-group-item webdev"
-              *ngFor="let module of modules">
+          <li class="list-group-item module"
+              *ngFor="let module of modules"
+              (click)="selectModule(module.id)"
+              [ngClass]="{'active': module.id === selectedModuleId}">
             {{module.title}}
           </li>
         </ul>
@@ -24,27 +26,35 @@
         <ul class="list-group shadow">
           <li class="list-group-item active">
             Lessons</li>
-          <li class="list-group-item webdev"
-              *ngFor="let course of courses">
-            {{course.title}}</li>
+          <li class="list-group-item lesson"
+              *ngFor="let lesson of lessons"
+              (click)="selectLesson(lesson.id)"
+              [ngClass]="{'active': lesson.id === selectedLessonId}">
+            {{lesson.title}}</li>
         </ul>
       </div>
       <div class="col">
         <ul class="list-group shadow">
           <li class="list-group-item active">
             Topics</li>
-          <li class="list-group-item webdev"
-              *ngFor="let course of courses">
-            {{course.title}}</li>
+          <li class="list-group-item topic"
+              *ngFor="let topic of topics"
+              (click)="selectTopic(topic.id)"
+              [ngClass]="{'active': topic.id === selectedTopicId}">
+            {{topic.title}}</li>
         </ul>
       </div>
       <div class="col">
         <ul class="list-group shadow">
           <li class="list-group-item active">
             Widgets</li>
-          <li class="list-group-item webdev"
-              *ngFor="let course of courses">
-            {{course.title}}</li>
+          <li class="list-group-item widget"
+              *ngFor="let widget of widgets"
+              (click)="selectWidget(widget.id)"
+              [ngClass]="{'active': widget.id === selectedWidgetId}">
+            {{widget.widgetType}}
+            <!--<br>-->
+            <!--Title: {{widget.title}}</li>-->
         </ul>
       </div>
     </div>
