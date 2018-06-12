@@ -1,15 +1,12 @@
-<div style="margin: 15px;">
-    <h1 style="color: mediumblue">Navigator</h1>
-    <h4 style="color: orangered">Courses [{{courses.length}}] </h4>
-    <hr/>
-
     <div class="row">
       <div class="col">
         <ul class="list-group shadow">
           <li class="list-group-item active">
             Courses</li>
           <li class="list-group-item webdev"
-              *ngFor="let course of courses">
+              *ngFor="let course of courses"
+              (click)="selectCourse(course.id)"
+              [ngClass]="{'active': course.id === selectedCourseId}">
             {{course.title}}</li>
         </ul>
       </div>
@@ -18,8 +15,9 @@
           <li class="list-group-item active">
             Modules</li>
           <li class="list-group-item webdev"
-              *ngFor="let course of courses">
-            {{course.title}}</li>
+              *ngFor="let module of modules">
+            {{module.title}}
+          </li>
         </ul>
       </div>
       <div class="col">
@@ -51,4 +49,3 @@
       </div>
     </div>
 
-</div>

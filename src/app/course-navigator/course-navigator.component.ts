@@ -11,6 +11,18 @@ export class CourseNavigatorComponent implements OnInit {
   constructor(private service:
                 CourseNavigatorServiceClient) { }
   courses = [];
+  modules = [];
+  lessons = [];
+  topics = [];
+  widgets = [];
+  selectedCourseId = 0;
+
+
+  selectCourse(courseId) {
+    this.selectedCourseId = courseId;
+    this.service.findAllModulesForCourses(courseId)
+      .then(modules => this.modules = modules);
+  }
   ngOnInit() {
     this.service.findAllCourses()
       .then(courses => {
