@@ -1,0 +1,14 @@
+<h2 style="color: #0069d9;">Course Grid ({{courses.length}})</h2>
+<!--<br/>-->
+<div class="row pt-3" >
+  <div *ngFor="let course of courses" class="col-sm-3 ">
+    <div class="card rounded shadow ">
+      <div class="card-body">
+        <h5 class="card-title">{{course.title}}</h5>
+        <!--<p class="card-text">Explore this course.</p>-->
+        <br>
+        <a routerLink="/course/{{course.id}}" class="btn btn-outline-primary">View Modules</a>
+      </div>
+    </div>
+  </div>
+</div>

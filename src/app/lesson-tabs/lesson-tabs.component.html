@@ -1,0 +1,16 @@
+<div>
+<ul class="nav nav-tabs">
+  <li *ngFor="let lesson of lessons"
+      class="nav-item">
+    <a class="nav-link wbdv"
+       [ngClass]="{'active': lesson.id == lessonId}"
+       routerLink="/course/{{courseId}}/module/{{moduleId}}/lesson/{{lesson.id}}">
+      {{lesson.title}}
+    </a>
+  </li>
+</ul>
+<!--<div class="border border-light rounded shadow-sm mt-2 mb-3 p-2 bg-light">-->
+  <div class="mt-2 mb-3 p-2">
+  <app-topic-pills></app-topic-pills>
+</div>
+</div>

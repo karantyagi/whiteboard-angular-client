@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Course} from '../models/coruse.model.client';
+import {Course} from '../models/course.model.client';
 import {ActivatedRoute} from '@angular/router';
 import {CourseServiceClient} from '../services/course.service.client';
 
@@ -17,7 +17,7 @@ export class CourseViewerComponent implements OnInit {
 
   course: Course = new Course();
   loadCourse(courseId) {
-    console.log(courseId);
+    // console.log(courseId);
     this.service.findCourseById(courseId)
       .then(course => this.course = course);
   }
