@@ -1,5 +1,21 @@
-# whiteboard-angular-client
-MEAN stack Web app for managing online courses, classes and related content.
+# CS5610 – Web Developement – Summer 1 2018
+Repository for CS5610-Web Development course at Northeastern University.
+
+# `White Board Angular Client`
+
+## `Purpose` <br/>
+
+> Implementing a MEAN stack Web app for managing online courses, classes and related content.
+
+> Angular Client, Express middleware, Node server, deployed on Heroku.<br>
+
+## `Links`
+
+- Angular Client Repo : 
+- Node.js Server Repo :
+- Heroku link :
+
+## `Description`
 
 The application is divided into three parts, the admin application, the faculty application, and the student application. The first assignment focused on the admin application. The second, third and fourth assignment focused on the faculty application. This is the first of three assignments that will focus on implementing the student application.
 
