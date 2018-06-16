@@ -5,6 +5,28 @@ export class UserServiceClient {
       .then(response => response.json());
   }
 
+  login(username, password) {
+    const credentials = {
+      username: username,
+      password: password
+    };
+    return fetch('http://localhost:4000/api/login', {
+      method: 'post',
+      body: JSON.stringify(credentials),
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
+
+  logout() {
+    return fetch('http://localhost:4000/api/logout', {
+      method: 'post',
+      credentials: 'include'
+    });
+  }
+
   profile() {
     return fetch('http://localhost:4000/api/profile',
       {

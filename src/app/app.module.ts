@@ -22,6 +22,7 @@ import {TopicServiceClient} from './services/topic.service.client';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
+import {UserServiceClient} from './services/user.service.client';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { LoginComponent } from './login/login.component';
     ModuleServiceClient,
     LessonServiceClient,
     TopicServiceClient,
-    WidgetServiceClient
+    WidgetServiceClient,
+    UserServiceClient
   ],
   bootstrap: [AppComponent]
 })
