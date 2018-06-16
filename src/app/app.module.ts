@@ -19,6 +19,9 @@ import {ModuleServiceClient} from './services/module.service.client';
 import {LessonServiceClient} from './services/lesson.service.client';
 import {WidgetServiceClient} from './services/widget.service.client';
 import {TopicServiceClient} from './services/topic.service.client';
+import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import {TopicServiceClient} from './services/topic.service.client';
     ModuleListComponent,
     LessonTabsComponent,
     TopicPillsComponent,
-    WidgetListComponent
+    WidgetListComponent,
+    RegisterComponent,
+    ProfileComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
