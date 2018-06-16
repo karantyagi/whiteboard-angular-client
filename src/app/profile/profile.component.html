@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg  navbar-light" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
   <!--<a class="navbar-brand" href="#">White-Board</a>-->
   <a class="navbar-brand" href="#" style="color: #007bff; font-size: x-large">WhiteBoard</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
@@ -10,18 +10,12 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/home">Home</a>
       </li>
-      <!--<li class="nav-item">-->
-      <!--<a class="nav-link" routerLink="/login">Login</a>-->
-      <!--</li>-->
-      <!--<li class="nav-item">-->
-        <!--<a class="nav-link" routerLink="/register" (click)="logout()">Logout</a>-->
-      <!--</li>-->
     </ul>
     <!--<form class="form-inline my-2 my-lg-0">-->
       <form class="form-inline mt-2 mt-md-0">
-      <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-      <span class="navbar-text ">
-        Logged in : john
+      <span class="navbar-text">
+        Logged in as : </span>
+        <span style="color: dimgrey; font-weight: bold">&nbsp;{{username}}
       </span>
       &nbsp;&nbsp;
       <button class="btn btn-outline-primary my-2 my-sm-0"
@@ -36,39 +30,28 @@
   <h2 style="color: #0069d9;">Profile</h2>
   <br>
 
-  <!--<input [(ngModel)]="username"-->
-         <!--placeholder="username"-->
-         <!--class="form-control"/>-->
-  <!--<input [(ngModel)]="firstName"-->
-         <!--placeholder="first name"-->
-         <!--class="form-control"/>-->
-  <!--<input [(ngModel)]="lastName"-->
-         <!--placeholder="lastName"-->
-         <!--class="form-control"/>-->
-  <!--<input [(ngModel)]="email"-->
-         <!--placeholder="email"-->
-         <!--class="form-control"/>-->
-
-
   <form>
     <div class="form-group row">
       <label for="inputUserName" class="col-form-label ml-5 px-2" style="width: 12%">User Name</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputUserName" value="Alice" >
+        <input [(ngModel)]="username" [ngModelOptions]="{standalone: true}"
+          type="text" class="form-control" id="inputUserName" placeholder="Username" value="" >
       </div>
     </div>
 
     <div class="form-group row ">
       <label for="inputFirstName" class="col-form-label ml-5 px-2" style="width: 12%">First Name</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputFirstName" placeholder="Firstname" value="">
+        <input [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}"
+          type="text" class="form-control" id="inputFirstName" placeholder="Firstname" value="">
       </div>
     </div>
 
     <div class="form-group row ">
       <label for="inputLastName" class="col-form-label ml-5 px-2" style="width: 12%">Last Name</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputLastName" placeholder="Lastname" value="">
+        <input [(ngModel)]="lastName" [ngModelOptions]="{standalone: true}"
+          type="text" class="form-control" id="inputLastName" placeholder="Lastname" value="">
       </div>
     </div>
 
@@ -76,21 +59,24 @@
     <div class="form-group row">
       <label for="inputPhone" class="col-form-label ml-5 px-2" style="width: 12%">Phone Number</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputPhone" placeholder="(555) 123-4323" value="">
+        <input [(ngModel)]="phone" [ngModelOptions]="{standalone: true}"
+          type="text" class="form-control" id="inputPhone" placeholder="(555) 123-4323" value="">
       </div>
     </div>
 
     <div class="form-group row">
       <label for="inputEmail" class="col-form-label ml-5 px-2" style="width: 12%">Email</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputEmail" placeholder="alice@wonderland.com" value="">
+        <input [(ngModel)]="email" [ngModelOptions]="{standalone: true}"
+          type="text" class="form-control" id="inputEmail" placeholder="alice@wonderland.com" value="">
       </div>
     </div>
 
     <div class="form-group row">
       <label for="inputAddress" class="col-form-label ml-5 px-2" style="width: 12%">Address</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputAddress" placeholder="address" value="">																			<!-- value="1991-12-30" -->
+        <input [(ngModel)]="address" [ngModelOptions]="{standalone: true}"
+          type="text" class="form-control" id="inputAddress" placeholder="address" value="">																			<!-- value="1991-12-30" -->
       </div>
     </div>
 

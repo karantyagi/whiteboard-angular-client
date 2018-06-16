@@ -31,6 +31,7 @@
       <div class="col-sm-10">
         <input type="text" class="form-control" id="usernameFld" name="first_name" placeholder="Alice"
                [(ngModel)]="username"
+               [ngModelOptions]="{standalone: true}"
                required="required">
       </div>
     </div>
@@ -40,6 +41,7 @@
       <div class="col-sm-10">
         <input type="password" class="form-control" id="passwordFld" name="password" placeholder="123qwe#$%"
                [(ngModel)]="password"
+               [ngModelOptions]="{standalone: true}"
                required="required">
       </div>
     </div>
@@ -47,7 +49,7 @@
     <div class="form-group row">
       <label for="verifyPasswordFld" class="col-form-label ml-5" style="width: 12%">Verify Password</label>
       <div class="col-sm-10">
-        <input [(ngModel)]="password2"
+        <input [(ngModel)]="password2" [ngModelOptions]="{standalone: true}"
           type="password" class="form-control" id="verifyPasswordFld" name="verify_password"
 
         placeholder="123qwe#$%" required="required">
