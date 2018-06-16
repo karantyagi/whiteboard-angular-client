@@ -6,40 +6,103 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" routerLink="/home">Home</a>
       </li>
       <!--<li class="nav-item">-->
       <!--<a class="nav-link" routerLink="/login">Login</a>-->
       <!--</li>-->
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/register">Register</a>
-      </li>
+      <!--<li class="nav-item">-->
+        <!--<a class="nav-link" routerLink="/register" (click)="logout()">Logout</a>-->
+      <!--</li>-->
     </ul>
+    <!--<form class="form-inline my-2 my-lg-0">-->
+      <form class="form-inline mt-2 mt-md-0">
+      <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+      <span class="navbar-text ">
+        Logged in : john
+      </span>
+      &nbsp;&nbsp;
+      <button class="btn btn-outline-primary my-2 my-sm-0"
+              (click)="logout()">Logout</button>
+    </form>
   </div>
 </nav>
+
+
 
 <div style="margin: 5px; padding: 15px;">
   <h2 style="color: #0069d9;">Profile</h2>
   <br>
 
-  <input [(ngModel)]="username"
-         placeholder="username"
-         class="form-control"/>
-  <input [(ngModel)]="firstName"
-         placeholder="first name"
-         class="form-control"/>
-  <input [(ngModel)]="lastName"
-         placeholder="lastName"
-         class="form-control"/>
-  <input [(ngModel)]="email"
-         placeholder="email"
-         class="form-control"/>
-  <button (click)="update()"
-          class="btn btn-primary btn-block">
-    Update
-  </button>
+  <!--<input [(ngModel)]="username"-->
+         <!--placeholder="username"-->
+         <!--class="form-control"/>-->
+  <!--<input [(ngModel)]="firstName"-->
+         <!--placeholder="first name"-->
+         <!--class="form-control"/>-->
+  <!--<input [(ngModel)]="lastName"-->
+         <!--placeholder="lastName"-->
+         <!--class="form-control"/>-->
+  <!--<input [(ngModel)]="email"-->
+         <!--placeholder="email"-->
+         <!--class="form-control"/>-->
+
+
+  <form>
+    <div class="form-group row">
+      <label for="inputUserName" class="col-form-label ml-5 px-2" style="width: 12%">User Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputUserName" value="Alice" >
+      </div>
+    </div>
+
+    <div class="form-group row ">
+      <label for="inputFirstName" class="col-form-label ml-5 px-2" style="width: 12%">First Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputFirstName" placeholder="Firstname" value="">
+      </div>
+    </div>
+
+    <div class="form-group row ">
+      <label for="inputLastName" class="col-form-label ml-5 px-2" style="width: 12%">Last Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputLastName" placeholder="Lastname" value="">
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label for="inputPhone" class="col-form-label ml-5 px-2" style="width: 12%">Phone Number</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputPhone" placeholder="(555) 123-4323" value="">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="inputEmail" class="col-form-label ml-5 px-2" style="width: 12%">Email</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputEmail" placeholder="alice@wonderland.com" value="">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="inputAddress" class="col-form-label ml-5 px-2" style="width: 12%">Address</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputAddress" placeholder="address" value="">																			<!-- value="1991-12-30" -->
+      </div>
+    </div>
+
+    <button (click)="update()"
+            class="btn btn-primary" style="margin-left:4%; width: 96%">
+      Update
+    </button>
+
+  </form>
+
+
+
 
   <!--<h2>Sections ({{sections.length}})</h2>-->
 
@@ -50,7 +113,6 @@
     <!--</li>-->
   <!--</ul>-->
 
-  <a (click)="logout()">Logout</a>
-  <a routerLink="/home">Home</a>
+  <!--<a (click)="logout()">Logout</a>-->
 
 </div>

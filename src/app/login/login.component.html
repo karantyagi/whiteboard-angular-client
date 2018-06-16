@@ -6,7 +6,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" routerLink="/home">Home</a>
       </li>
@@ -48,10 +48,12 @@
         <div class="form-group row align-content-center">
           <div class="col-sm-12">
             <button (click)="login(username, password)"
-                    id="loginBtn" class="btn btn-primary btn-block">
+                    id="loginBtn" class="btn btn-primary mb-2"
+                    style="margin-left:3%; width: 97%;">
               Login
             </button>
-            <button id="resetBtn" class="btn btn-secondary btn-block">
+            <button id="resetBtn" class="btn btn-secondary btn-block"
+                    style="margin-left:3%; width: 97%;">
               <!--(click)="reset(username, password)"-->
               Reset
             </button>

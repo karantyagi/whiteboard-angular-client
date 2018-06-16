@@ -27,7 +27,7 @@
 
   <form>
     <div class="form-group row">
-      <label for="usernameFld" class="col-sm-2 col-form-label text-center">Username</label>
+      <label for="usernameFld"  class="col-form-label ml-5" style="width: 12%">Username</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" id="usernameFld" name="first_name" placeholder="Alice"
                [(ngModel)]="username"
@@ -36,7 +36,7 @@
     </div>
 
     <div class="form-group row">
-      <label for="passwordFld" class="col-sm-2 col-form-label text-center">Password</label>
+      <label for="passwordFld"  class="col-form-label ml-5" style="width: 12%">Password</label>
       <div class="col-sm-10">
         <input type="password" class="form-control" id="passwordFld" name="password" placeholder="123qwe#$%"
                [(ngModel)]="password"
@@ -45,7 +45,7 @@
     </div>
 
     <div class="form-group row">
-      <label for="verifyPasswordFld" class="col-sm-2 col-form-label text-center">Verify Password</label>
+      <label for="verifyPasswordFld" class="col-form-label ml-5" style="width: 12%">Verify Password</label>
       <div class="col-sm-10">
         <input [(ngModel)]="password2"
           type="password" class="form-control" id="verifyPasswordFld" name="verify_password"
@@ -57,7 +57,7 @@
     <button id="registerBtn"
             type="button"
             (click)="register(username, password, password2)"
-            class="btn btn-success btn-block">Register
+            class="btn text-white" style="margin-left:3%; width: 97%; background-color: darkgreen">Register
     </button>
     <div>
     </div>
