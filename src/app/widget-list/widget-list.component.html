@@ -2,22 +2,25 @@
   <div [ngSwitch]="widget.widgetType">
     <div *ngSwitchCase="'Heading'">
       <div [ngSwitch]="widget.size">
-        <h1 *ngSwitchCase="'1'">{{widget.text}}</h1>
-        <h2 *ngSwitchCase="'2'">{{widget.text}}</h2>
-        <h3 *ngSwitchCase="'3'">{{widget.text}}</h3>
-        <h4 *ngSwitchCase="'4'">{{widget.text}}</h4>
-        <h5 *ngSwitchCase="'5'">{{widget.text}}</h5>
-        <h6 *ngSwitchCase="'6'">{{widget.text}}</h6>
+        <h1 *ngSwitchCase="'1'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h1>
+        <h2 *ngSwitchCase="'2'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h2>
+        <h3 *ngSwitchCase="'3'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h3>
+        <h4 *ngSwitchCase="'4'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h4>
+        <h5 *ngSwitchCase="'5'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h5>
+        <h6 *ngSwitchCase="'6'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h6>
       </div>
     </div>
     <div *ngSwitchCase="'Link'">
       <a href="{{widget.href}}">{{widget.text}}</a>
     </div>
+    <div *ngSwitchCase="'Image'">
+      <img src="{{widget.src}}" alt="image" class="shadow rounded card p-2" height="250px" />
+    </div>
     <div *ngSwitchCase="'List'">
-      <h1>List Widget</h1>
+      <h4>List Widget</h4>
       <ul class="list-group">
-        <li class="list-group-item"
-            *ngFor="let item of widget.items.split('|')">
+        <li class="list-group-item bg-light"
+            *ngFor="let item of widget.listItems.split('\n')">
           {{item}}
         </li>
       </ul>

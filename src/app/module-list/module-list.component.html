@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-4">
+  <div class="col-3">
     <ul class="list-group rounded">
       <li class="list-group-item active">Modules</li>
       <li [ngClass]="{'active': module.id == moduleId}" *ngFor="let module of modules"
@@ -9,7 +9,7 @@
       </li>
     </ul>
   </div>
-  <div class="col-8">
+  <div class="col-9">
     <app-lesson-tabs></app-lesson-tabs>
   </div>
 </div>
