@@ -1,3 +1,66 @@
-<p>
-  register works!
-</p>
+<nav class="navbar navbar-expand-lg  navbar-light" style="background-color: #e3f2fd;">
+  <!--<a class="navbar-brand" href="#">White-Board</a>-->
+  <a class="navbar-brand" href="#" style="color: #007bff; font-size: x-large">WhiteBoard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      <!--<li class="nav-item">-->
+      <!--<a class="nav-link" routerLink="/register">Register</a>-->
+      <!--</li>-->
+    </ul>
+  </div>
+</nav>
+
+<div style="margin: 5px; padding: 15px;">
+  <h2 style="color: #0069d9;">Register</h2>
+  <br>
+
+
+  <form>
+    <div class="form-group row">
+      <label for="usernameFld" class="col-sm-2 col-form-label text-center">Username</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="usernameFld" name="first_name" placeholder="Alice"
+               [(ngModel)]="username"
+               required="required">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="passwordFld" class="col-sm-2 col-form-label text-center">Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="passwordFld" name="password" placeholder="123qwe#$%"
+               [(ngModel)]="password"
+               required="required">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="verifyPasswordFld" class="col-sm-2 col-form-label text-center">Verify Password</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="password2"
+          type="password" class="form-control" id="verifyPasswordFld" name="verify_password"
+
+        placeholder="123qwe#$%" required="required">
+      </div>
+    </div>
+
+    <button id="registerBtn"
+            type="button"
+            (click)="register(username, password, password2)"
+            class="btn btn-success btn-block">Register
+    </button>
+    <div>
+    </div>
+
+  </form>
+</div>
