@@ -2,12 +2,16 @@
 <!--<br/>-->
 <div class="row pt-3" >
   <div *ngFor="let course of courses" class="col-sm-3 ">
-    <div class="card rounded shadow ">
+    <div class="card rounded shadow">
       <div class="card-body">
         <h5 class="card-title">{{course.title}}</h5>
         <!--<p class="card-text">Explore this course.</p>-->
-        <br>
-        <a routerLink="/course/{{course.id}}" class="btn btn-outline-primary">View Modules</a>
+        <a routerLink="/course/{{course.id}}" class="btn shadow btn-primary">View Modules</a>
+        &nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="card-footer text-muted">
+        <a routerLink="/course/{{course.id}}/section"
+           class="btn btn-success shadow-lg">Enroll</a>
       </div>
     </div>
   </div>
