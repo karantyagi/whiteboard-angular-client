@@ -21,10 +21,10 @@ export class SectionListComponent implements OnInit {
   sections = [];
   loadSections(courseId) {
     this.courseId = courseId;
-    // this
-    //   .service
-    //   .findSectionsForCourse(courseId)
-    //   .then(sections => this.sections = sections);
+    this
+      .service
+      .findSectionsForCourse(courseId)
+      .then(sections => this.sections = sections);
   }
 
   createSection(sectionName, seats) {
