@@ -12,7 +12,7 @@ export class SectionListComponent implements OnInit {
   constructor(private service: SectionServiceClient,
               private router: Router,
               private route: ActivatedRoute) {
-    this.route.params.subscribe(params => this.loadSections(params['courseId']))
+    this.route.params.subscribe(params => this.loadSections(params['courseId']));
   }
 
   sectionName = '';
@@ -37,14 +37,15 @@ export class SectionListComponent implements OnInit {
       });
   }
 
-  // enroll(section) {
-  //   // alert(section._id);
-  //   this.service
-  //     .enrollStudentInSection(section._id)
-  //     .then(() => {
-  //       this.router.navigate(['profile']);
-  //     });
-  // }
+  enroll(section) {
+     // alert(section._id);
+    console.log('section on client', section);
+    this.service
+      .enrollStudentInSection(section._id)
+      .then(() => {
+        this.router.navigate(['profile']);
+      });
+  }
 
   ngOnInit() {
   }

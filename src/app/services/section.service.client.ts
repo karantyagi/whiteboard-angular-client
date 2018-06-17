@@ -11,6 +11,7 @@ export class SectionServiceClient {
   }
 
   enrollStudentInSection(sectionId) {
+    console.log('Client works fine');
     const url = 'http://localhost:4000/api/section/' + sectionId + '/enrollment';
     return fetch(url, {
       method: 'post',
