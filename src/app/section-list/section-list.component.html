@@ -57,14 +57,16 @@
     </button>
   </form>
 
+<br>
 
-
-  <!--<ul class="list-group">-->
-    <!--<li *ngFor="let section of sections" class="list-group-item">-->
-      <!--{{section.name}} {{section.seats}}-->
-      <!--<button (click)="enroll(section)"-->
-              <!--class="float-right btn btn-primary">Enroll</button>-->
-    <!--</li>-->
-  <!--</ul>-->
+  <ul class="list-group" style="width: 36rem">
+    <li *ngFor="let section of sections" class="list-group-item">
+      <span style="font-size: large; color:dodgerblue;"> </span>{{section.name}}
+      <button (click)="enroll(section)"
+              class="float-right btn btn-primary float-right mt-2">Enroll</button>
+      <br> <span style="color: dimgrey; font-style: italic "> Seats Available :  </span>
+      {{section.seats}}
+    </li>
+  </ul>
 
 </div>
