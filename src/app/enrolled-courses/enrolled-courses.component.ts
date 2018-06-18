@@ -27,8 +27,8 @@ export class EnrolledCoursesComponent implements OnInit {
 
   getSection(courseId) {
     for (let i = 0; i < this.sections.length; i++) {
-     if (courseId === this.sections[0].section.courseId) {
-       return (this.sections[0].section.name);
+     if (courseId === this.sections[i].section.courseId) {
+       return (this.sections[i].section.name);
      }
     }
     return ('');
@@ -54,8 +54,8 @@ export class EnrolledCoursesComponent implements OnInit {
                 this.sections = sections;
                 for (let i = 0; i < this.sections.length; i++) {
                   this.courseIds.push({
-                    'section': this.sections[0].section.name,
-                    'course': this.sections[0].section.courseId
+                    'section': this.sections[i].section.name,
+                    'course': this.sections[i].section.courseId
                   });
                 }
                 console.log('course ids: ', this.courseIds[0].course);
