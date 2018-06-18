@@ -1,5 +1,4 @@
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<nav class="navbar navbar-expand-md  navbar-light" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
   <!--<a class="navbar-brand" href="#">White-Board</a>-->
   <a class="navbar-brand" href="#" style="color: #007bff; font-size: x-large">WhiteBoard</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
@@ -19,43 +18,29 @@
            routerLink="/admin">Admin</a>
       </li>
     </ul>
-
-    <form [hidden]=!loggedIn
-          class="form-inline mt-2 mt-md-0">
+    <!--<form class="form-inline my-2 my-lg-0">-->
+    <form class="form-inline mt-2 mt-md-0">
       <span class="navbar-text">
-      Logged in as : </span>
+        Logged in as : </span>
       <span style="color: dimgrey; font-weight: bold">&nbsp;{{username}}
       </span>
       &nbsp;&nbsp;
       <button class="btn btn-outline-primary my-2 my-sm-0"
-              (click)="logout()">Logout
-      </button>
+              (click)="logout()">Logout</button>
     </form>
-
-
-    <form [hidden]=loggedIn
-          class="form-inline mt-2 mt-md-0">
-
-      <button class="btn btn-outline-primary my-2 my-sm-0 mr-2"
-              routerLink="/login">&nbsp;Login&nbsp;
-      </button>
-
-      <button class="btn btn-outline-primary my-2 my-sm-0"
-              routerLink="/register">Register
-      </button>
-    </form>
-
-
   </div>
 </nav>
 
+
+
+<br>
 <div style="margin: 5px; padding: 15px;">
-  <div [hidden]=!loggedIn>
-    <app-enrolled-courses [hidden]=admin></app-enrolled-courses>
-    <hr/>
-  </div>
-  <app-course-grid></app-course-grid>
-  <!--<h1 style="color: #007bff">WhiteBoard</h1>-->
+<ul class="list-group rounded py-1 my-1" style="width: 36rem">
+  <li *ngFor="let course of courses" class="list-group-item shadow-sm rounded bg-light my-1">
+    <span style="font-size: large; color:dodgerblue;"> </span>{{course.title}}
+    <button class="float-right btn btn-outline-primary float-right"
+            routerLink="/course/{{course.id}}/section">Show Sections</button>
+      <!--(click)="showSections(section)"-->
+  </li>
+</ul>
 </div>
-
-

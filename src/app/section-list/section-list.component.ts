@@ -16,6 +16,7 @@ export class SectionListComponent implements OnInit {
               private route: ActivatedRoute) {
     this.route.params.subscribe(params => this.loadSections(params['courseId']));
   }
+
   sectionName = '';
   seats = '';
   courseId = '';
@@ -23,6 +24,7 @@ export class SectionListComponent implements OnInit {
   username;
   admin = false;
   loggedIn = true;
+  updateMode = false;
 
   loadSections(courseId) {
     this.courseId = courseId;
@@ -53,6 +55,20 @@ export class SectionListComponent implements OnInit {
     } else {
       alert('Login to enroll in a course section.');
     }
+  }
+
+  editSection(section) {
+    this.updateMode = true;
+    alert('Edit this section');
+  }
+
+  updateSection(section) {
+    alert('Section updated');
+    this.updateMode = false;
+  }
+
+  deleteSection(section) {
+    alert('delete section');
   }
 
   ngOnInit() {

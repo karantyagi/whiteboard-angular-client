@@ -32,7 +32,6 @@ export class EnrolledCoursesComponent implements OnInit {
      }
     }
     return ('');
-    console.log('course ids: ', this.courseIds[0].course);
   }
 
   ngOnInit() {

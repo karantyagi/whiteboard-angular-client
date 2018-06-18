@@ -7,8 +7,15 @@
   </button>
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" routerLink="/home">Home</a>
+      </li>
+      <li class="nav-item" [hidden] = !loggedIn>
+        <a class="nav-link" routerLink="/profile">Profile</a>
+      </li>
+      <li class="nav-item" [hidden] = !loggedIn>
+        <a class="nav-link" [hidden] = !admin
+           routerLink="/admin">Admin</a>
       </li>
     </ul>
     <!--<form class="form-inline my-2 my-lg-0">-->
@@ -86,7 +93,7 @@
     </button>
 
   </form>
-
+<div [hidden] = admin>
   <hr>
     <h2 class="ml-lg-4" style="color: mediumblue;">Sections Enrolled in : {{sections.length}}</h2>
   <ul class="list-group ml-lg-2">
@@ -98,5 +105,5 @@
   </ul>
 
   <!--<a (click)="logout()">Logout</a>-->
-
+</div>
 </div>

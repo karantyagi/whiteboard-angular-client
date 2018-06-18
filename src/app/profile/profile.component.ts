@@ -19,6 +19,8 @@ export class ProfileComponent implements OnInit {
 
   user = {};
   username;
+  admin = false;
+  loggedIn = true;
   password;
   sections = [];
   course = {};
@@ -49,8 +51,16 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.service
       .profile()
-      .then(user =>
-        this.username = user.username);
+      .then(user => {
+          this.username = user.username
+        if (this.username === 'No session maintained') {
+          this.loggedIn = false;
+        }
+        if (this.username === 'admin') {
+          this.admin = true;
+        }
+      }
+      );
 
     this.sectionService
       .findSectionsForStudent()
