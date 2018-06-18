@@ -10,20 +10,42 @@ import {UserServiceClient} from '../services/user.service.client';
 export class LoginComponent implements OnInit {
 
 
-  username;
-  password;
-
-  login(username, password) {
-    console.log([username, password]);
-    this.service
-      .login(username, password)
-      .then(() => {
-        this.router.navigate(['profile']);
-      });
-  }
+  username = '';
+  password = '';
+  user = {};
 
   constructor(private router: Router,
               private service: UserServiceClient) {
+  }
+
+  reset(username, password) {
+    this.username = '';
+    this.password = '';
+  }
+
+  login(username, password) {
+    if (username === '') {
+
+      alert('Enter username');
+    } else {
+      if (password === '') {
+        alert('Enter password');
+      } else {
+        this.service
+          .login(username, password)
+          .then((user) => {
+              console.log('user found : ', user);
+              if (user === null) {
+                alert('Invalid username or password.\nPlease try again !');
+              } else {
+                if (this.password === user.password) {
+                  this.router.navigate(['profile']);
+                }
+              }
+            }
+          );
+      }
+    }
   }
 
   ngOnInit() {
