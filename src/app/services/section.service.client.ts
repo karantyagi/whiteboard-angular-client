@@ -35,4 +35,24 @@ export class SectionServiceClient {
       }
     });
   }
+
+  deleteSection(sectionId) {
+    return fetch('http://localhost:4000/api/section/' + sectionId, {
+      method: 'delete',
+      credentials: 'include',
+    });
+  }
+
+  updateSection(sectionId, name, seats) {
+    const section = {name, seats};
+    console.log('section body at client service: ', section);
+    return fetch('http://localhost:4000/api/section/' + sectionId, {
+      method: 'put',
+      body: JSON.stringify(section),
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
 }

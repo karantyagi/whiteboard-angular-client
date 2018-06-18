@@ -25,6 +25,7 @@ export class SectionListComponent implements OnInit {
   admin = false;
   loggedIn = true;
   updateMode = false;
+  updateId = 0;
 
   loadSections(courseId) {
     this.courseId = courseId;
@@ -59,16 +60,40 @@ export class SectionListComponent implements OnInit {
 
   editSection(section) {
     this.updateMode = true;
-    alert('Edit this section');
+    this.sectionName = section.name;
+    this.seats = section.seats;
+    this.updateId = section._id;
   }
 
-  updateSection(section) {
+  updateSection() {
+    this
+      .service
+      .updateSection(this.updateId, this.sectionName, this.seats)
+      .then(() => {
+        this.loadSections(this.courseId);
+      });
     alert('Section updated');
     this.updateMode = false;
+    this.sectionName = '';
+    this.seats = '';
   }
 
   deleteSection(section) {
-    alert('delete section');
+    // alert('delete section : ' + section._id);
+    this
+      .service
+      .deleteSection(section._id)
+      .then(() => {
+        this.loadSections(this.courseId);
+      });
+  }
+
+  logout() {
+    this.userService
+      .logout()
+      .then(() =>
+        this.router.navigate(['login']));
+
   }
 
   ngOnInit() {

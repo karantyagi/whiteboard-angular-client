@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+<nav class="navbar navbar-expand-md  navbar-light" style="background-color: #e3f2fd;">
   <!--<a class="navbar-brand" href="#">White-Board</a>-->
   <a class="navbar-brand" href="#" style="color: #007bff; font-size: x-large">WhiteBoard</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
@@ -18,22 +19,39 @@
            routerLink="/admin">Admin</a>
       </li>
     </ul>
-    <!--<form class="form-inline my-2 my-lg-0">-->
-    <form class="form-inline mt-2 mt-md-0">
+
+    <form [hidden]=!loggedIn
+          class="form-inline mt-2 mt-md-0">
       <span class="navbar-text">
-        Logged in as : </span>
+      Logged in as : </span>
       <span style="color: dimgrey; font-weight: bold">&nbsp;{{username}}
       </span>
       &nbsp;&nbsp;
       <button class="btn btn-outline-primary my-2 my-sm-0"
-              (click)="logout()">Logout</button>
+              (click)="logout()">Logout
+      </button>
     </form>
+
+
+    <form [hidden]=loggedIn
+          class="form-inline mt-2 mt-md-0">
+
+      <button class="btn btn-outline-primary my-2 my-sm-0 mr-2"
+              routerLink="/login">&nbsp;Login&nbsp;
+      </button>
+
+      <button class="btn btn-outline-primary my-2 my-sm-0"
+              routerLink="/register">Register
+      </button>
+    </form>
+
+
   </div>
 </nav>
 
 <div style="margin: 5px; padding: 15px;">
   <h2 style="color: darkorange">Sections for course: {{courseId}}</h2>
-  <h3  [hidden] = !updateMode class="text-center" style="color: limegreen">Edit this section{{courseId}}</h3>
+  <h4  [hidden] = !updateMode class="text-center p-0 m-0" style="color: limegreen">Editing this section</h4>
   <div [hidden] = !admin>
   <br>
   <form>
