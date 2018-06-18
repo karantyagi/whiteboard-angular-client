@@ -32,7 +32,11 @@ export class UserServiceClient {
       {
         credentials: 'include', // include, same-origin, *omit
       })
-      .then(response => response.json());
+      .then((response) => {
+        console.log('response in client at Profile : ', response);
+        return response.json();
+      })
+      ;
   }
 
   createUser(username, password) {

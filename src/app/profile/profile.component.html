@@ -87,17 +87,15 @@
 
   </form>
 
+  <hr>
+    <h2 class="ml-lg-4" style="color: mediumblue;">Sections Enrolled in : {{sections.length}}</h2>
+  <ul class="list-group ml-lg-2">
+    <li *ngFor="let enrollment of sections" class="list-group-item my-1 rounded bg-light shadow-sm col-sm-6">
+      <b>{{enrollment.section.name}}</b>&nbsp;&nbsp;<i>( Course : {{courseDetails(enrollment.section.courseId)}} )</i>
 
-
-
-  <!--<h2>Sections ({{sections.length}})</h2>-->
-
-  <!--<ul class="list-group">-->
-    <!--<li *ngFor="let enrollment of sections" class="list-group-item">-->
-      <!--{{enrollment.section.name}}-->
       <!--({{enrollment.section.seats}})-->
-    <!--</li>-->
-  <!--</ul>-->
+    </li>
+  </ul>
 
   <!--<a (click)="logout()">Logout</a>-->
 

@@ -59,8 +59,8 @@
 
 <br>
 
-  <ul class="list-group" style="width: 36rem">
-    <li *ngFor="let section of sections" class="list-group-item">
+  <ul class="list-group rounded py-1 my-1" style="width: 36rem">
+    <li *ngFor="let section of sections" class="list-group-item shadow bg-light">
       <span style="font-size: large; color:dodgerblue;"> </span>{{section.name}}
       <button (click)="enroll(section)"
               class="float-right btn btn-primary float-right mt-2">Enroll</button>
