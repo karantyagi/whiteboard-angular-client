@@ -23,8 +23,7 @@
   <h2 style="color: darkorange">Sections for course: {{courseId}}</h2>
 
   <br>
-
-  <form>
+  <form [hidden] = !admin>
 
     <div class="form-group row">
       <label for="sectionFld" class="col-sm-2 text-center col-form-label">

@@ -17,21 +17,23 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/register">Register</a>
       </li>
-      <!--<form class="form-inline mt-2 mt-md-0">-->
-      <!--<span class="navbar-text">-->
-      <!--Logged in as : </span>-->
-      <!--<span style="color: dimgrey; font-weight: bold">&nbsp;{{username}}-->
-      <!--</span>-->
-      <!--&nbsp;&nbsp;-->
-      <!--<button class="btn btn-outline-primary my-2 my-sm-0"-->
-      <!--(click)="logout()">Logout</button>-->
-      <!--</form>-->
     </ul>
-    <form class="form-inline mt-2 mt-md-0">
+
+    <form [hidden]=!loggedIn
+          class="form-inline mt-2 mt-md-0">
       <span class="navbar-text">
       Logged in as : </span>
       <span style="color: dimgrey; font-weight: bold">&nbsp;{{username}}
       </span>
+      &nbsp;&nbsp;
+      <button class="btn btn-outline-primary my-2 my-sm-0"
+              (click)="logout()">Logout
+      </button>
+    </form>
+
+
+    <form [hidden]=loggedIn
+          class="form-inline mt-2 mt-md-0">
 
       <button class="btn btn-outline-primary my-2 my-sm-0 mr-2"
               routerLink="/login">&nbsp;Login&nbsp;
@@ -47,8 +49,10 @@
 </nav>
 
 <div style="margin: 5px; padding: 15px;">
-  <app-enrolled-courses></app-enrolled-courses>
-  <hr/>
+  <div [hidden]=!loggedIn>
+    <app-enrolled-courses [hidden]=admin></app-enrolled-courses>
+    <hr/>
+  </div>
   <app-course-grid></app-course-grid>
   <!--<h1 style="color: #007bff">WhiteBoard</h1>-->
 </div>
