@@ -70,6 +70,19 @@ export class AdminComponent implements OnInit {
       });
   }
 
+  updateSection() {
+    this
+      .sectionService
+      .updateSection(this.updateId, this.sectionName, this.seats)
+      .then(() => {
+        this.loadSections();
+      });
+    alert('Section updated');
+    this.updateMode = false;
+    this.sectionName = '';
+    this.seats = '';
+  }
+
   createSection(sectionName, seats) {
     // console.log(sectionName, ' ', seats);
     if (this.sectionName === '') {
