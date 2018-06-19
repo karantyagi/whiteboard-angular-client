@@ -22,6 +22,7 @@ export class SectionListComponent implements OnInit {
   courseId = '';
   sections = [];
   username;
+  userId;
   admin = false;
   loggedIn = true;
   updateMode = false;
@@ -49,15 +50,23 @@ export class SectionListComponent implements OnInit {
 
   enroll(section) {
     if (this.loggedIn === true) {
-      console.log('section on client', section);
-      this.service
-        .enrollStudentInSection(section._id)
-        .then(() => {
-          this.router.navigate(['profile']);
+      console.log('validating enrollment');
+      console.log(this.userId, section._id);
+
+      alert(section._id + 'check if student is already enrolled in this section');
+      this.service.findEnrollmentByCredentials(this.userId, section._id)
+        .then((enrollment) => {
+          // console.log(enrollment);
+          console.log('returned value -need null here !');
         });
-    } else {
-      alert('Login to enroll in a course section.');
-    }
+    //   this.service
+    //     .enrollStudentInSection(section._id)
+    //     .then(() => {
+    //       this.router.navigate(['profile']);
+    //     });
+    // } else {
+    //   alert('Login to enroll in a course section.');
+     }
   }
 
   editSection(section) {
@@ -104,6 +113,7 @@ export class SectionListComponent implements OnInit {
       .then((user) => {
           console.log('logged in as : ', user);
           this.username = user.username;
+          this.userId = user._id;
           if (this.username === 'No session maintained') {
             this.loggedIn = false;
           }

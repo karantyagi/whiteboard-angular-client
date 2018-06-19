@@ -19,6 +19,12 @@ export class SectionServiceClient {
     });
   }
 
+  findEnrollmentByCredentials(studentId, sectionId) {
+    console.log('student : ', studentId, ' | section : ', sectionId);
+    return fetch('http://localhost:4000/api/student/' + studentId + '/section/' + sectionId)
+      .then(response => response.json());
+  }
+
   findSectionsForCourse(courseId) {
     return fetch(this.SECTION_URL.replace('COURSEID', courseId))
       .then(response => response.json());
