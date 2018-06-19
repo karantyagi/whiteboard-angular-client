@@ -50,24 +50,27 @@ export class SectionListComponent implements OnInit {
 
   enroll(section) {
     if (this.loggedIn === true) {
-      console.log('validating enrollment');
-      console.log(this.userId, section._id);
-
-      alert(section._id + 'check if student is already enrolled in this section');
+      // console.log('validating enrollment');
+      // console.log(this.userId, section._id);
+      // alert(section._id + 'check if student is already enrolled in this section');
       this.service.findEnrollmentByCredentials(this.userId, section._id)
         .then((enrollment) => {
-          // console.log(enrollment);
-          console.log('returned value -need null here !');
+          // console.log('returned value -need null here !');
+          console.log('check : ', enrollment);
+          if (enrollment != null) {
+            alert('You are already enrolled in this course !');
+          } else {
+            this.service
+              .enrollStudentInSection(section._id)
+              .then(() => {
+                this.router.navigate(['profile']);
+              });
+          }
         });
-    //   this.service
-    //     .enrollStudentInSection(section._id)
-    //     .then(() => {
-    //       this.router.navigate(['profile']);
-    //     });
-    // } else {
-    //   alert('Login to enroll in a course section.');
-     }
-  }
+    } else {
+      alert('Login to enroll in a course section.');
+    }
+ }
 
   editSection(section) {
     this.updateMode = true;
