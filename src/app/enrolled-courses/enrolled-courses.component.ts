@@ -25,6 +25,10 @@ export class EnrolledCoursesComponent implements OnInit {
   admin = false;
   loggedIn = true;
 
+  unique = (value, index, self) => {
+    return self.indexOf(value) === index;
+  }
+
   getSection(courseId) {
     for (let i = 0; i < this.sections.length; i++) {
      if (courseId === this.sections[i].section.courseId) {
@@ -53,17 +57,20 @@ export class EnrolledCoursesComponent implements OnInit {
               .then(sections => {
                 this.sections = sections;
                 for (let i = 0; i < this.sections.length; i++) {
-                  this.courseIds.push({
-                    'section': this.sections[i].section.name,
-                    'course': this.sections[i].section.courseId
-                  });
+                  this.courseIds.push(this.sections[i].section.courseId
+                  //   {
+                  //   'section': this.sections[i].section.name,
+                  //   'course': this.sections[i].section.courseId
+                  // }
+                  );
                 }
-                console.log('course ids: ', this.courseIds[0].course);
+                this.courseIds = this.courseIds.filter(this.unique);
+                console.log('course ids: ', this.courseIds);
 
                 for (let i = 0; i < this.courseIds.length; i++) {
-                  (this.service.findCourseById(this.courseIds[i].course)
+                  (this.service.findCourseById(this.courseIds[i])
                     .then((course) => {
-                      this.courseList.push(course);
+                        this.courseList.push(course);
                     }));
                 }
               });

@@ -1,16 +1,17 @@
-<h2 style="color: #0069d9;">My Courses : {{courseIds.length}} </h2>
+<h2 style="color: #0069d9;">My Active Courses : {{courseList.length}} </h2>
 
 <!--<br/>-->
-<ul class="list-group py-1 my-1 rounded" style="width: 40rem">
+<ul class="list-group py-1 my-1 rounded" style="width: 20rem">
   <li *ngFor="let course of courseList" class="list-group-item shadow bg-light">
-    <div class="row">
-      <div class="col-5 border-right my-0">
-        {{course.title}}
-      </div>
-      <div class="col-7 pl-4">
-        <span style="color: dimgrey;">{{getSection(course.id)}}</span>
-      </div>
-    </div>
+    {{course.title}}
+    <!--<div class="row">-->
+      <!--<div class="col-5 border-right my-0">-->
+        <!--{{course.title}}-->
+      <!--</div>-->
+      <!--<div class="col-7 pl-4">-->
+        <!--<span style="color: dimgrey;">{{getSection(course.id)}}</span>-->
+      <!--</div>-->
+    <!--</div>-->
     <!--<span class="border-right border-danger mx-2"></span>-->
     <!---->
   </li>
