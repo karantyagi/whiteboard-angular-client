@@ -27,6 +27,14 @@ export class SectionServiceClient {
     });
   }
 
+  unEnrollAllStudentsFromSection(sectionId) {
+    console.log('SectionID : ', sectionId);
+    return fetch('http://localhost:4000/api/section/' + sectionId + '/enrollment', {
+      method: 'delete',
+      credentials: 'include'
+    });
+  }
+
   findEnrollmentByCredentials(studentId, sectionId) {
     console.log('student : ', studentId, ' | section : ', sectionId);
     return fetch('http://localhost:4000/api/student/' + studentId + '/section/' + sectionId)

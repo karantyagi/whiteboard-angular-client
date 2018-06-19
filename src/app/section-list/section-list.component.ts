@@ -36,18 +36,6 @@ export class SectionListComponent implements OnInit {
       .then(sections => this.sections = sections);
   }
 
-  createSection(sectionName, seats) {
-    // console.log(sectionName, ' ', seats);
-    this
-      .service
-      .createSection(this.courseId, sectionName, seats)
-      .then(() => {
-        this.loadSections(this.courseId);
-        this.sectionName = '';
-          this.seats = '';
-      });
-  }
-
   enroll(section) {
     if (this.loggedIn === true) {
       // console.log('validating enrollment');
@@ -56,15 +44,20 @@ export class SectionListComponent implements OnInit {
       this.service.findEnrollmentByCredentials(this.userId, section._id)
         .then((enrollment) => {
           // console.log('returned value -need null here !');
-          console.log('check : ', enrollment);
-          if (enrollment != null) {
-            alert('You are already enrolled in this course !');
+          // console.log('check : ', enrollment);
+          console.log('Available Seats (in this section): ', section.seats);
+          if ( section.seats === 0) {
+            alert('Cannot Enroll. Seats Full !!');
           } else {
-            this.service
-              .enrollStudentInSection(section._id)
-              .then(() => {
-                this.router.navigate(['profile']);
-              });
+            if (enrollment != null) {
+              alert('You are already enrolled in this course !');
+            } else {
+              this.service
+                .enrollStudentInSection(section._id)
+                .then(() => {
+                  this.router.navigate(['profile']);
+                });
+            }
           }
         });
     } else {
@@ -72,35 +65,6 @@ export class SectionListComponent implements OnInit {
     }
  }
 
-  editSection(section) {
-    this.updateMode = true;
-    this.sectionName = section.name;
-    this.seats = section.seats;
-    this.updateId = section._id;
-  }
-
-  updateSection() {
-    this
-      .service
-      .updateSection(this.updateId, this.sectionName, this.seats)
-      .then(() => {
-        this.loadSections(this.courseId);
-      });
-    alert('Section updated');
-    this.updateMode = false;
-    this.sectionName = '';
-    this.seats = '';
-  }
-
-  deleteSection(section) {
-    // alert('delete section : ' + section._id);
-    this
-      .service
-      .deleteSection(section._id)
-      .then(() => {
-        this.loadSections(this.courseId);
-      });
-  }
 
   logout() {
     this.userService
