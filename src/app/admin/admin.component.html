@@ -10,11 +10,11 @@
       <li class="nav-item active">
         <a class="nav-link" routerLink="/home">Home</a>
       </li>
-      <li class="nav-item" [hidden] = !loggedIn>
+      <li class="nav-item" [hidden]=!loggedIn>
         <a class="nav-link" routerLink="/profile">Profile</a>
       </li>
-      <li class="nav-item" [hidden] = !loggedIn>
-        <a class="nav-link" [hidden] = !admin
+      <li class="nav-item" [hidden]=!loggedIn>
+        <a class="nav-link" [hidden]=!admin
            routerLink="/admin">Admin</a>
       </li>
     </ul>
@@ -26,14 +26,15 @@
       </span>
       &nbsp;&nbsp;
       <button class="btn btn-outline-primary my-2 my-sm-0"
-              (click)="logout()">Logout</button>
+              (click)="logout()">Logout
+      </button>
     </form>
   </div>
 </nav>
 
 <div style="margin: 5px; padding: 15px;">
   <div class="row">
-    <div class="col border pr-1">
+    <div class="col mr-0">
       <ul class="list-group rounded py-1 my-1" style="width: 20rem">
         <li *ngFor="let course of courses"
             class="list-group-item shadow rounded my-2"
@@ -41,17 +42,112 @@
             [ngClass]="{'active': course.id === selectedCourseId}">
           <span style="font-size: large; color:dodgerblue;"> </span>{{course.title}}
           <!--<button class="float-right btn btn-outline-primary float-right"-->
-                  <!--routerLink="/course/{{course.id}}/section">View Sections</button>-->
+          <!--routerLink="/course/{{course.id}}/section">View Sections</button>-->
           <!--(click)="showSections(section)"-->
         </li>
       </ul>
     </div>
-    <div class="col-7 border">
+    <div class="col-7 ml-0">
       <!--<h3 class="mb-1 text-center" style="color: dimgray;"> Section Editor</h3>-->
       <div style="padding: 10px;">
         <h2 style="color: darkorange" class="text-center">Sections {{courseId}}</h2>
-        <h4  [hidden] = !updateMode class="text-center p-0 m-0" style="color: limegreen">Editing this section</h4>
-        <div [hidden] = !admin>
+        <div [hidden]=!admin>
+          <div class="row ml-1 mb-2">
+            <button [hidden]=addMode
+                    [disabled] = updateMode
+                    (click)="addSection()"
+                    class="float-right btn btn-outline-warning rounded shadow">
+              <i class="fas fa-plus"></i>&nbsp;&nbsp;Add new section
+            </button>
+
+          </div>
+          <h4 [hidden]=!updateMode class="text-center p-0 mb-2" style="color: limegreen">Edit this section</h4>
+          <div [hidden] = !updateMode>
+          <form>
+
+            <div class="form-group row">
+              <label for="sectionFld1" class="col-sm-2 text-center col-form-label">
+                Section Name </label>
+              <div class="col-sm-10">
+                <input [ngModelOptions]="{standalone: true}"
+                       [(ngModel)]="sectionName"
+                       id="sectionFld1"
+                       class="form-control wbdv-password-fld"
+                       placeholder="Section Name">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="seatsFld2" class="col-sm-2 text-center col-form-label">
+                Seats Available </label>
+              <div class="col-sm-10">
+                <input [ngModelOptions]="{standalone: true}"
+                       [(ngModel)]="seats"
+                       id="seatsFld2"
+                       class="form-control wbdv-password-fld"
+                       placeholder="Seats Available">
+              </div>
+            </div>
+            <button id="updateBtn"
+                    [hidden] = !updateMode
+                    (click)="updateSection(sectionName, seats)"
+                    class="btn btn-success"
+                    style="margin-left:2%; width: 98%;">
+              Update Section
+            </button>
+            <button id="cancelUpdateBtn"
+                    [hidden]=!updateMode
+                    (click)="cancelUpdateMode()"
+                    class="btn btn-secondary mt-2"
+                    style="margin-left:2%; width: 98%;">
+              Cancel
+            </button>
+          </form>
+          </div>
+
+
+          <div [hidden]=!addMode class="mb-3">
+            <form>
+
+              <div class="form-group row">
+                <label for="sectionFld" class="col-sm-2 text-center col-form-label">
+                  Section Name </label>
+                <div class="col-sm-10">
+                  <input [ngModelOptions]="{standalone: true}"
+                         [(ngModel)]="sectionName"
+                         id="sectionFld"
+                         class="form-control wbdv-password-fld"
+                         placeholder="Section Name">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="seatsFld" class="col-sm-2 text-center col-form-label">
+                  Seats Available </label>
+                <div class="col-sm-10">
+                  <input [ngModelOptions]="{standalone: true}"
+                         [(ngModel)]="seats"
+                         id="seatsFld"
+                         class="form-control wbdv-password-fld"
+                         placeholder="Seats Available">
+                </div>
+              </div>
+              <button id="createBtn"
+                      [hidden]=updateMode
+                      (click)="createSection(sectionName, seats)"
+                      class="btn"
+                      style="margin-left:2%; width: 98%; color: white; background-color: orange">
+                Add Section
+              </button>
+              <button id="cancelBtn"
+                      [hidden]=updateMode
+                      (click)="cancel()"
+                      class="btn btn-secondary mt-2"
+                      style="margin-left:2%; width: 98%;">
+                Cancel
+              </button>
+            </form>
+          </div>
           <ul class="list-group rounded py-1 my-1" style="width: 36rem">
             <li *ngFor="let section of sections" class="list-group-item shadow bg-light">
               <span style="font-size: large; color:dodgerblue;"> </span>{{section.name}}
@@ -68,7 +164,7 @@
           <br>
 
         </div>
+      </div>
     </div>
   </div>
-
 </div>

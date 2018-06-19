@@ -15,6 +15,11 @@ export class AdminComponent implements OnInit {
   sections = [];
   courses: Course[] = [];
   selectedCourseId;
+  addMode = false;
+  updateMode = false;
+  updateId = 0;
+  sectionName = '';
+  seats = '';
 
   username;
   admin = false;
@@ -24,12 +29,71 @@ export class AdminComponent implements OnInit {
               private userService: UserServiceClient,
               private router: Router) {
   }
+  loadSections() {
+    this
+      .sectionService
+      .findSectionsForCourse(this.selectedCourseId)
+      .then(sections => this.sections = sections);
+  }
   logout() {
     this.userService
       .logout()
       .then(() =>
         this.router.navigate(['login']));
 
+  }
+  addSection() {
+    this.addMode = true;
+  }
+
+  cancel() {
+    this.addMode = false;
+  }
+
+  cancelUpdateMode() {
+    this.updateMode = false;
+  }
+  editSection(section) {
+    this.updateMode = true;
+    this.sectionName = section.name;
+    this.seats = section.seats;
+    this.updateId = section._id;
+  }
+
+  deleteSection(section) {
+    // alert('delete section : ' + section._id);
+    this
+      .sectionService
+      .deleteSection(section._id)
+      .then(() => {
+        this.loadSections();
+      });
+  }
+
+  createSection(sectionName, seats) {
+    // console.log(sectionName, ' ', seats);
+    if (this.sectionName === '') {
+      alert('Enter Section Name');
+    } else {
+      if (this.seats === '') {
+        alert('Enter Maximum seats');
+      } else {
+        this
+          .sectionService
+          .createSection(this.selectedCourseId, sectionName, seats)
+          .then(() => {
+            // this.loadSections(this.courseId);
+            this.sectionService
+              .findSectionsForCourse(this.selectedCourseId)
+              .then(sections => {
+                this.sections = sections;
+                this.sectionName = '';
+                this.seats = '';
+                this.addMode = false;
+              });
+          });
+      }
+    }
   }
 
   selectCourse(id) {
