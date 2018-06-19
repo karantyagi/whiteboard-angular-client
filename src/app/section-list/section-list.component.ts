@@ -42,6 +42,8 @@ export class SectionListComponent implements OnInit {
       .createSection(this.courseId, sectionName, seats)
       .then(() => {
         this.loadSections(this.courseId);
+        this.sectionName = '';
+          this.seats = '';
       });
   }
 

@@ -14,6 +14,7 @@ export class AdminComponent implements OnInit {
 
   sections = [];
   courses: Course[] = [];
+  selectedCourseId;
 
   username;
   admin = false;
@@ -31,6 +32,13 @@ export class AdminComponent implements OnInit {
 
   }
 
+  selectCourse(id) {
+    this.selectedCourseId = id;
+    this.sectionService
+      .findSectionsForCourse(this.selectedCourseId)
+      .then(sections => this.sections = sections);
+  }
+
   ngOnInit() {
     this.userService
       .profile()
@@ -46,9 +54,12 @@ export class AdminComponent implements OnInit {
       });
 
     this.service.findAllCourses()
-      .then(courses => this.courses = courses);
+      .then(courses => {
+        this.courses = courses;
+        this.selectedCourseId = this.courses[0].id;
+        this.sectionService
+          .findSectionsForCourse(this.selectedCourseId)
+          .then(sections => this.sections = sections);
+      });
   }
-
-
-
 }
