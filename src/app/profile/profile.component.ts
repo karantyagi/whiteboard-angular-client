@@ -76,8 +76,14 @@ export class ProfileComponent implements OnInit {
     return ('');
   }
 
-  dropSection(section) {
-      alert('You will be un-enrolled from this course section.');
+  dropSection(enrollment) {
+      // console.log('You will be un-enrolled from this course section.');
+      // console.log(enrollment._id);
+      this.sectionService
+        .unEnrollStudentFromSection(enrollment._id)
+        .then(() => {
+          console.log('Successfully unenrolled !');
+        });
   }
 
 
