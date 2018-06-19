@@ -9,7 +9,7 @@
         <a routerLink="/course/{{course.id}}" class="btn shadow btn-primary">View Modules</a>
         &nbsp;&nbsp;&nbsp;
       </div>
-      <div class="card-footer text-muted">
+      <div class="card-footer text-muted" [hidden] = admin>
         <a routerLink="/course/{{course.id}}/section"
            class="btn btn-success shadow-lg">Enroll</a>
       </div>
