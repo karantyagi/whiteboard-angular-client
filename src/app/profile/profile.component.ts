@@ -40,16 +40,16 @@ export class ProfileComponent implements OnInit {
     // console.log('email : ', this.email);
     // console.log('address : ', this.address);
     this.user = {
-      'username' : this.username,
-      'firstName' : this.firstName,
-      'lastName' : this.lastName,
-      'email' : this.email,
-      'address' : this.address,
-      'phone' : this.phone
+      'username': this.username,
+      'firstName': this.firstName,
+      'lastName': this.lastName,
+      'email': this.email,
+      'address': this.address,
+      'phone': this.phone
     };
     // console.log('User : ', this.user);
     // console.log('ID : ', this.updateId);
-       this
+    this
       .service
       .updateUser(this.updateId, this.user)
       .then(() => {
@@ -77,13 +77,30 @@ export class ProfileComponent implements OnInit {
   }
 
   dropSection(enrollment) {
-      // console.log('You will be un-enrolled from this course section.');
-      // console.log(enrollment._id);
-      this.sectionService
-        .unEnrollStudentFromSection(enrollment._id)
-        .then(() => {
-          console.log('Successfully unenrolled !');
-        });
+    // console.log('You will be un-enrolled from this course section.');
+    console.log(enrollment.section._id);
+    this.sectionService
+      .unEnrollStudentFromSection(enrollment._id, enrollment.section._id)
+      .then(() => {
+        this.sectionService
+          .findSectionsForStudent()
+          .then(sections => {
+            this.sections = sections;
+            for (let i = 0; i < this.sections.length; i++) {
+              this.courseIds.push({
+                'section': this.sections[i].section.name,
+                'course': this.sections[i].section.courseId
+              });
+            }
+            for (let i = 0; i < this.courseIds.length; i++) {
+              (this.courseService.findCourseById(this.courseIds[i].course)
+                .then((course) => {
+                  this.courseList.push(course);
+                }));
+            }
+          });
+        console.log('Successfully unenrolled !');
+      });
   }
 
 
@@ -91,10 +108,17 @@ export class ProfileComponent implements OnInit {
     this.service
       .profile()
       .then(userProfile => {
-        this.service.findUserById(userProfile._id)
-          .then((user) => {
-            console.log('user from DB : ', user);
-            this.updateId = user._id;
+        if (userProfile.username === 'No session maintained') {
+          this.loggedIn = false;
+          this.router.navigate(['login']);
+        }
+        if (userProfile.username === 'admin') {
+          this.admin = true;
+        }
+          this.service.findUserById(userProfile._id)
+            .then((user) => {
+              console.log('user from DB : ', user);
+              this.updateId = user._id;
               this.username = user.username;
               this.phone = user.phone;
               this.email = user.email;
@@ -120,15 +144,7 @@ export class ProfileComponent implements OnInit {
                     }
                   });
               }
-              if (this.username === 'No session maintained') {
-                this.loggedIn = false;
-                this.router.navigate(['login']);
-              }
-              if (this.username === 'admin') {
-                this.admin = true;
-              }
-          });
-
+            });
         }
       );
   }
