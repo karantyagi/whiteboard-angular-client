@@ -1,13 +1,26 @@
 export class UserServiceClient {
 
   findUserById(userId) {
-    return fetch('http://localhost:4000/api/user/' + userId)
+    return fetch('http://localhost:4000/api/user/' + userId, {
+      method: 'get',
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
       .then(response => response.json());
   }
 
   findUserByUsername(username) {
     console.log('username : ', username);
-    return fetch('http://localhost:4000/api/user/' + username)
+    return fetch('http://localhost:4000/api/user/username/' + username,
+      {
+        method: 'get',
+        credentials: 'include',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
       .then(response => response.json());
   }
 

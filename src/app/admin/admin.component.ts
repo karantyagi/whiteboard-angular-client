@@ -62,6 +62,8 @@ export class AdminComponent implements OnInit {
 
   deleteSection(section) {
     // alert('delete section : ' + section._id);
+
+
     this
       .sectionService
       .deleteSection(section._id)
