@@ -38,8 +38,8 @@ export class SectionServiceClient {
       .then(response => response.json());
   }
 
-  createSection(courseId, name, seats) {
-    const section = {courseId, name, seats};
+  createSection(courseId, name, maxSeats, seats) {
+    const section = {courseId, name, maxSeats, seats};
     return fetch(this.SECTION_URL.replace('COURSEID', courseId), {
       method: 'post',
       body: JSON.stringify(section),
@@ -57,8 +57,8 @@ export class SectionServiceClient {
     });
   }
 
-  updateSection(sectionId, name, seats) {
-    const section = {name, seats};
+  updateSection(sectionId, name, maxSeats, seats) {
+    const section = {name, maxSeats, seats};
     console.log('section body at client service: ', section);
     return fetch('http://localhost:4000/api/section/' + sectionId, {
       method: 'put',

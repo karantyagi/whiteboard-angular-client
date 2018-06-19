@@ -19,8 +19,10 @@ export class AdminComponent implements OnInit {
   updateMode = false;
   updateId = 0;
   sectionName = '';
+  maxSeats = '';
   seats = '';
-
+  currentMaxSeats;
+  currentSeats;
   username;
   admin = false;
   loggedIn = true;
@@ -56,7 +58,9 @@ export class AdminComponent implements OnInit {
   editSection(section) {
     this.updateMode = true;
     this.sectionName = section.name;
-    this.seats = section.seats;
+    this.maxSeats = section.maxSeats;
+    this.currentSeats = section.seats;
+    this.currentMaxSeats = section.maxSeats;
     this.updateId = section._id;
   }
 
@@ -73,29 +77,53 @@ export class AdminComponent implements OnInit {
   }
 
   updateSection() {
-    this
-      .sectionService
-      .updateSection(this.updateId, this.sectionName, this.seats)
-      .then(() => {
-        this.loadSections();
-      });
-    alert('Section updated');
-    this.updateMode = false;
-    this.sectionName = '';
-    this.seats = '';
+    if (this.maxSeats > this.currentMaxSeats) {
+      this.seats = this.currentSeats + (this.maxSeats - this.currentMaxSeats);
+      console.log('New maxSeats : ', this.maxSeats, ' | New Available seats (??): ', this.seats);
+      console.log('Current maxSeats : ', this.currentMaxSeats, ' | Current Available seats : ', this.currentSeats);
+      this
+        .sectionService
+        .updateSection(this.updateId, this.sectionName, this.maxSeats, this.seats)
+        .then(() => {
+          this.loadSections();
+        });
+      alert('Section updated');
+      this.updateMode = false;
+      this.sectionName = '';
+      this.maxSeats = '';
+    } else {
+      this.seats = this.currentSeats - (this.currentMaxSeats - this.maxSeats);
+      console.log('New maxSeats : ', this.maxSeats, ' | New Available seats (??): ', this.seats);
+      console.log('Current maxSeats : ', this.currentMaxSeats, ' | Current Available seats : ', this.currentSeats);
+      if ( this.seats < 0) {
+        alert('You cannot decrease seats to ' + this.maxSeats + ' \n' +
+          '(as ' + (this.currentMaxSeats - this.currentSeats) + ' students are already enrolled.)');
+      } else {
+        this
+          .sectionService
+          .updateSection(this.updateId, this.sectionName, this.maxSeats, this.seats)
+          .then(() => {
+            this.loadSections();
+          });
+        alert('Section updated');
+        this.updateMode = false;
+        this.sectionName = '';
+        this.maxSeats = '';
+      }
+    }
   }
 
-  createSection(sectionName, seats) {
+  createSection(sectionName, maxSeats) {
     // console.log(sectionName, ' ', seats);
     if (this.sectionName === '') {
       alert('Enter Section Name');
     } else {
-      if (this.seats === '') {
-        alert('Enter Maximum seats');
+      if (this.maxSeats === '') {
+        alert('Enter Number of Maximum seats');
       } else {
         this
           .sectionService
-          .createSection(this.selectedCourseId, sectionName, seats)
+          .createSection(this.selectedCourseId, sectionName, maxSeats, maxSeats)
           .then(() => {
             // this.loadSections(this.courseId);
             this.sectionService
@@ -103,7 +131,7 @@ export class AdminComponent implements OnInit {
               .then(sections => {
                 this.sections = sections;
                 this.sectionName = '';
-                this.seats = '';
+                this.maxSeats = '';
                 this.addMode = false;
               });
           });

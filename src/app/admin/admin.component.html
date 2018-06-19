@@ -35,7 +35,7 @@
 <div style="margin: 5px; padding: 15px;">
   <div class="row">
     <div class="col mr-0">
-      <ul class="list-group rounded py-1 my-1" style="width: 20rem">
+      <ul class="list-group rounded py-1 my-1" style="width: 18rem">
         <li *ngFor="let course of courses"
             class="list-group-item shadow rounded my-2"
             (click)="selectCourse(course.id)"
@@ -47,7 +47,7 @@
         </li>
       </ul>
     </div>
-    <div class="col-7 ml-0">
+    <div class="col-8 ml-0">
       <!--<h3 class="mb-1 text-center" style="color: dimgray;"> Section Editor</h3>-->
       <div style="padding: 10px;">
         <h2 style="color: darkorange" class="text-center">Sections {{courseId}}</h2>
@@ -66,7 +66,7 @@
           <form>
 
             <div class="form-group row">
-              <label for="sectionFld1" class="col-sm-2 text-center col-form-label">
+              <label for="sectionFld1" class="text-center col-form-label"  style="width:15%">
                 Section Name </label>
               <div class="col-sm-10">
                 <input [ngModelOptions]="{standalone: true}"
@@ -78,28 +78,28 @@
             </div>
 
             <div class="form-group row">
-              <label for="seatsFld2" class="col-sm-2 text-center col-form-label">
-                Seats Available </label>
+              <label for="seatsFld2" class="text-center col-form-label" style="width:15%">
+                Max Seats</label>
               <div class="col-sm-10">
                 <input [ngModelOptions]="{standalone: true}"
-                       [(ngModel)]="seats"
+                       [(ngModel)]="maxSeats"
                        id="seatsFld2"
                        class="form-control wbdv-password-fld"
-                       placeholder="Seats Available">
+                       placeholder="Max Seats in section">
               </div>
             </div>
             <button id="updateBtn"
                     [hidden] = !updateMode
-                    (click)="updateSection(sectionName, seats)"
+                    (click)="updateSection(sectionName, maxSeats)"
                     class="btn btn-success"
-                    style="margin-left:2%; width: 98%;">
+                    style="margin-left:0%; width: 100%;">
               Update Section
             </button>
             <button id="cancelUpdateBtn"
                     [hidden]=!updateMode
                     (click)="cancelUpdateMode()"
-                    class="btn btn-secondary mt-2"
-                    style="margin-left:2%; width: 98%;">
+                    class="btn btn-secondary mt-2 mb-3"
+                    style="margin-left:0%; width: 100%;">
               Cancel
             </button>
           </form>
@@ -110,7 +110,7 @@
             <form>
 
               <div class="form-group row">
-                <label for="sectionFld" class="col-sm-2 text-center col-form-label">
+                <label for="sectionFld" class="text-center col-form-label" style="width:15%">
                   Section Name </label>
                 <div class="col-sm-10">
                   <input [ngModelOptions]="{standalone: true}"
@@ -122,28 +122,28 @@
               </div>
 
               <div class="form-group row">
-                <label for="seatsFld" class="col-sm-2 text-center col-form-label">
-                  Seats Available </label>
+                <label for="seatsFld" class="text-center col-form-label" style="width:15%">
+                  Max Seats </label>
                 <div class="col-sm-10">
                   <input [ngModelOptions]="{standalone: true}"
-                         [(ngModel)]="seats"
+                         [(ngModel)]="maxSeats"
                          id="seatsFld"
                          class="form-control wbdv-password-fld"
-                         placeholder="Seats Available">
+                         placeholder="Max Seats in section">
                 </div>
               </div>
               <button id="createBtn"
                       [hidden]=updateMode
-                      (click)="createSection(sectionName, seats)"
+                      (click)="createSection(sectionName, maxSeats, maxSeats)"
                       class="btn"
-                      style="margin-left:2%; width: 98%; color: white; background-color: orange">
+                      style="margin-left:0%; width: 100%; color: white; background-color: orange">
                 Add Section
               </button>
               <button id="cancelBtn"
                       [hidden]=updateMode
                       (click)="cancel()"
                       class="btn btn-secondary mt-2"
-                      style="margin-left:2%; width: 98%;">
+                      style="margin-left:0%; width: 100%;">
                 Cancel
               </button>
             </form>
