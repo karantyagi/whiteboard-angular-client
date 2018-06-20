@@ -38,7 +38,7 @@
       <ul class="list-group rounded py-1 my-1" style="width: 18rem">
         <li *ngFor="let course of courses"
             class="list-group-item shadow rounded my-2"
-            (click)="selectCourse(course.id)"
+            (click)="selectCourse(course.id, course.title)"
             [ngClass]="{'active': course.id === selectedCourseId}">
           <span style="font-size: large; color:dodgerblue;"> </span>{{course.title}}
           <!--<button class="float-right btn btn-outline-primary float-right"-->

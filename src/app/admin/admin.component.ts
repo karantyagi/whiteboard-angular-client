@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit {
   sections = [];
   courses: Course[] = [];
   selectedCourseId;
+  selectedCourseTitle;
   addMode = false;
   updateMode = false;
   updateId = 0;
@@ -46,6 +47,7 @@ export class AdminComponent implements OnInit {
   }
   addSection() {
     this.addMode = true;
+    this.sectionName = this.selectedCourseTitle + ' Section 1';
   }
 
   cancel() {
@@ -141,8 +143,9 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  selectCourse(id) {
+  selectCourse(id, title) {
     this.selectedCourseId = id;
+    this.selectedCourseTitle = title;
     this.sectionService
       .findSectionsForCourse(this.selectedCourseId)
       .then(sections => this.sections = sections);
@@ -166,6 +169,7 @@ export class AdminComponent implements OnInit {
       .then(courses => {
         this.courses = courses;
         this.selectedCourseId = this.courses[0].id;
+        this.selectedCourseTitle = this.courses[0].title;
         this.sectionService
           .findSectionsForCourse(this.selectedCourseId)
           .then(sections => this.sections = sections);
