@@ -79,8 +79,8 @@ export class AdminComponent implements OnInit {
   }
 
   updateSection() {
-    if (this.maxSeats > this.currentMaxSeats) {
-      this.seats = this.currentSeats + (this.maxSeats - this.currentMaxSeats);
+    if (this.maxSeats.valueOf() > this.currentMaxSeats.valueOf()) {
+      this.seats = (Number(this.currentSeats) + (Number(this.maxSeats) - Number(this.currentMaxSeats))).toString();
       console.log('New maxSeats : ', this.maxSeats, ' | New Available seats (??): ', this.seats);
       console.log('Current maxSeats : ', this.currentMaxSeats, ' | Current Available seats : ', this.currentSeats);
       this
@@ -94,10 +94,10 @@ export class AdminComponent implements OnInit {
       this.sectionName = '';
       this.maxSeats = '';
     } else {
-      this.seats = this.currentSeats - (this.currentMaxSeats - this.maxSeats);
+      this.seats = (Number(this.currentSeats) - (Number(this.currentMaxSeats) - Number(this.maxSeats))).toString();
       console.log('New maxSeats : ', this.maxSeats, ' | New Available seats (??): ', this.seats);
       console.log('Current maxSeats : ', this.currentMaxSeats, ' | Current Available seats : ', this.currentSeats);
-      if ( this.seats < 0) {
+      if ( this.seats.valueOf() < '0'.valueOf()) {
         alert('You cannot decrease seats to ' + this.maxSeats + ' \n' +
           '(as ' + (this.currentMaxSeats - this.currentSeats) + ' students are already enrolled.)');
       } else {
