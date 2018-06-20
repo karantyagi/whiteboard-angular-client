@@ -15,12 +15,14 @@ export class ModuleListComponent implements OnInit {
       params => this.setParams(params));
   }
 
-  courseId = 0;
-  moduleId = 0;
+  courseId;
+  moduleId;
   modules = [];
 
   setParams(params) {
+    // console.log('module params : ', params);
     this.courseId = params['courseId'];
+    // console.log('Course Id : ', this.courseId);
     this.moduleId = params['moduleId'];
     this.loadModules(this.courseId);
   }

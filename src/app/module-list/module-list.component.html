@@ -3,7 +3,8 @@
     <ul class="list-group rounded">
       <li class="list-group-item active">Modules</li>
       <li [ngClass]="{'active': module.id == moduleId}" *ngFor="let module of modules"
-          class="list-group-item wbdv">
+          class="list-group-item wbdv"
+      >
         <a routerLink="/course/{{courseId}}/module/{{module.id}}">
           {{module.title}}</a>
       </li>
