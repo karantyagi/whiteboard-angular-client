@@ -130,6 +130,7 @@ export class ProfileComponent implements OnInit {
                   .findSectionsForStudent()
                   .then(sections => {
                     this.sections = sections;
+                    console.log('Sections : ', sections);
                     for (let i = 0; i < this.sections.length; i++) {
                       this.courseIds.push({
                         'section': this.sections[i].section.name,
