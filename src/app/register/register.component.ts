@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  reset(username, password) {
+  reset(username, password, password2) {
     this.username = '';
     this.password = '';
     this.password2 = '';

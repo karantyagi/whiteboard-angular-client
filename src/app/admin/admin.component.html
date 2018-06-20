@@ -50,7 +50,7 @@
     <div class="col-8 ml-0">
       <!--<h3 class="mb-1 text-center" style="color: dimgray;"> Section Editor</h3>-->
       <div style="padding: 10px;">
-        <h2 style="color: darkorange" class="text-center">Sections {{courseId}}</h2>
+        <h2 style="color: darkorange" class="text-center">Sections</h2>
         <div [hidden]=!admin>
           <div class="row ml-1 mb-2">
             <button [hidden]=addMode
@@ -90,7 +90,7 @@
             </div>
             <button id="updateBtn"
                     [hidden] = !updateMode
-                    (click)="updateSection(sectionName, maxSeats)"
+                    (click)="updateSection()"
                     class="btn btn-success"
                     style="margin-left:0%; width: 100%;">
               Update Section
@@ -134,7 +134,7 @@
               </div>
               <button id="createBtn"
                       [hidden]=updateMode
-                      (click)="createSection(sectionName, maxSeats, maxSeats)"
+                      (click)="createSection(sectionName, maxSeats)"
                       class="btn"
                       style="margin-left:0%; width: 100%; color: white; background-color: orange">
                 Add Section
