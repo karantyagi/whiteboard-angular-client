@@ -8,13 +8,16 @@
         <h4 *ngSwitchCase="'4'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h4>
         <h5 *ngSwitchCase="'5'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h5>
         <h6 *ngSwitchCase="'6'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h6>
+        <br/>
       </div>
     </div>
     <div *ngSwitchCase="'Link'">
       <a href="{{widget.href}}">{{widget.text}}</a>
+      <br/>
     </div>
     <div *ngSwitchCase="'Image'">
       <img src="{{widget.src}}" alt="image" class="shadow rounded card p-2" height="250px" />
+      <br/>
     </div>
     <div *ngSwitchCase="'List'">
       <h4>List Widget</h4>
@@ -24,12 +27,11 @@
           {{item}}
         </li>
       </ul>
+      <br/>
     </div>
     <div *ngSwitchCase="'Exam'">
-      <h2 style="color: #5a6268">Exam Widget</h2>
     </div>
     <div *ngSwitchCase="'Assignment'">
-      <h2 style="color: darkgreen">Assignment Widget</h2>
     </div>
   </div>
 </div>
