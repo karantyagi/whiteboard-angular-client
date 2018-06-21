@@ -1,10 +1,9 @@
 export class SectionServiceClient {
 
-  SECTION_URL = 'http://localhost:4000/api/course/COURSEID/section';
+  SECTION_URL = 'https://kt-whiteboard-nodejs-server.herokuapp.com/api/course/COURSEID/section';
 
   findSectionsForStudent() {
-    const url = 'http://localhost:4000/api/student/section';
-    return fetch(url, {
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/student/section', {
       credentials: 'include'
     })
       .then(response => response.json());
@@ -12,7 +11,7 @@ export class SectionServiceClient {
 
   enrollStudentInSection(sectionId) {
     console.log('Client works fine');
-    const url = 'http://localhost:4000/api/section/' + sectionId + '/enrollment';
+    const url = 'https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/' + sectionId + '/enrollment';
     return fetch(url, {
       method: 'post',
       credentials: 'include'
@@ -21,7 +20,7 @@ export class SectionServiceClient {
 
   unEnrollStudentFromSection(enrollmentId, sectionId) {
     console.log('EnrollmentID : ', enrollmentId, ' | SectionID : ', sectionId);
-    return fetch('http://localhost:4000/api/section/' + sectionId + '/enrollment/' + enrollmentId, {
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/' + sectionId + '/enrollment/' + enrollmentId, {
       method: 'delete',
       credentials: 'include'
     });
@@ -29,7 +28,7 @@ export class SectionServiceClient {
 
   unEnrollAllStudentsFromSection(sectionId) {
     console.log('SectionID : ', sectionId);
-    return fetch('http://localhost:4000/api/section/' + sectionId + '/enrollment', {
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/' + sectionId + '/enrollment', {
       method: 'delete',
       credentials: 'include'
     });
@@ -37,7 +36,7 @@ export class SectionServiceClient {
 
   findEnrollmentByCredentials(studentId, sectionId) {
     console.log('student : ', studentId, ' | section : ', sectionId);
-    return fetch('http://localhost:4000/api/student/' + studentId + '/section/' + sectionId)
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/student/' + studentId + '/section/' + sectionId)
       .then(response => response.json());
   }
 
@@ -59,7 +58,7 @@ export class SectionServiceClient {
   }
 
   deleteSection(sectionId) {
-    return fetch('http://localhost:4000/api/section/' + sectionId, {
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/' + sectionId, {
       method: 'delete',
       credentials: 'include',
     });
@@ -68,7 +67,7 @@ export class SectionServiceClient {
   updateSection(sectionId, name, maxSeats, seats) {
     const section = {name, maxSeats, seats};
     console.log('section body at client service: ', section);
-    return fetch('http://localhost:4000/api/section/' + sectionId, {
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/' + sectionId, {
       method: 'put',
       body: JSON.stringify(section),
       credentials: 'include',

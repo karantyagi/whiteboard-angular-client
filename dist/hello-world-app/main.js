@@ -1909,18 +1909,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SectionServiceClient", function() { return SectionServiceClient; });
 var SectionServiceClient = /** @class */ (function () {
     function SectionServiceClient() {
-        this.SECTION_URL = 'http://localhost:4000/api/course/COURSEID/section';
+        this.SECTION_URL = 'https://kt-whiteboard-nodejs-server.herokuapp.com/api/course/COURSEID/section';
     }
     SectionServiceClient.prototype.findSectionsForStudent = function () {
-        var url = 'http://localhost:4000/api/student/section';
-        return fetch(url, {
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/student/section', {
             credentials: 'include'
         })
             .then(function (response) { return response.json(); });
     };
     SectionServiceClient.prototype.enrollStudentInSection = function (sectionId) {
         console.log('Client works fine');
-        var url = 'http://localhost:4000/api/section/' + sectionId + '/enrollment';
+        var url = 'https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/' + sectionId + '/enrollment';
         return fetch(url, {
             method: 'post',
             credentials: 'include'
@@ -1928,21 +1927,21 @@ var SectionServiceClient = /** @class */ (function () {
     };
     SectionServiceClient.prototype.unEnrollStudentFromSection = function (enrollmentId, sectionId) {
         console.log('EnrollmentID : ', enrollmentId, ' | SectionID : ', sectionId);
-        return fetch('http://localhost:4000/api/section/' + sectionId + '/enrollment/' + enrollmentId, {
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/' + sectionId + '/enrollment/' + enrollmentId, {
             method: 'delete',
             credentials: 'include'
         });
     };
     SectionServiceClient.prototype.unEnrollAllStudentsFromSection = function (sectionId) {
         console.log('SectionID : ', sectionId);
-        return fetch('http://localhost:4000/api/section/' + sectionId + '/enrollment', {
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/' + sectionId + '/enrollment', {
             method: 'delete',
             credentials: 'include'
         });
     };
     SectionServiceClient.prototype.findEnrollmentByCredentials = function (studentId, sectionId) {
         console.log('student : ', studentId, ' | section : ', sectionId);
-        return fetch('http://localhost:4000/api/student/' + studentId + '/section/' + sectionId)
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/student/' + studentId + '/section/' + sectionId)
             .then(function (response) { return response.json(); });
     };
     SectionServiceClient.prototype.findSectionsForCourse = function (courseId) {
@@ -1961,7 +1960,7 @@ var SectionServiceClient = /** @class */ (function () {
         });
     };
     SectionServiceClient.prototype.deleteSection = function (sectionId) {
-        return fetch('http://localhost:4000/api/section/' + sectionId, {
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/' + sectionId, {
             method: 'delete',
             credentials: 'include',
         });
@@ -1969,7 +1968,7 @@ var SectionServiceClient = /** @class */ (function () {
     SectionServiceClient.prototype.updateSection = function (sectionId, name, maxSeats, seats) {
         var section = { name: name, maxSeats: maxSeats, seats: seats };
         console.log('section body at client service: ', section);
-        return fetch('http://localhost:4000/api/section/' + sectionId, {
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/section/' + sectionId, {
             method: 'put',
             body: JSON.stringify(section),
             credentials: 'include',
