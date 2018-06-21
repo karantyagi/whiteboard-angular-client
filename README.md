@@ -11,9 +11,9 @@ Repository for CS5610-Web Development course at Northeastern University.
 
 ## `Links`
 
-- __Angular Client Repo :__ [https://github.com/karantyagi/whiteboard-angular-client](https://github.com/karantyagi/whiteboard-angular-client)
-- __Node.js Server Repo :__
-- __Heroku link :__ [https://kt-whiteboard-angular-client.herokuapp.com/](https://kt-whiteboard-angular-client.herokuapp.com/)
+- Angular Client Repo : [https://github.com/karantyagi/whiteboard-angular-client](https://github.com/karantyagi/whiteboard-angular-client)
+- Node.js Server Repo : [https://github.com/karantyagi/whiteboard-nodejs-server](https://github.com/karantyagi/whiteboard-nodejs-server)
+- Heroku link : [https://kt-whiteboard-angular-client.herokuapp.com/](https://kt-whiteboard-angular-client.herokuapp.com/)
 
 ## `Description`
 
