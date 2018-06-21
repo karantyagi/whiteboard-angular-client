@@ -1,7 +1,7 @@
 export class UserServiceClient {
 
   findUserById(userId) {
-    return fetch('http://localhost:4000/api/user/' + userId, {
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user/' + userId, {
       method: 'get',
       credentials: 'include',
       headers: {
@@ -13,7 +13,7 @@ export class UserServiceClient {
 
   findUserByUsername(username) {
     console.log('username : ', username);
-    return fetch('http://localhost:4000/api/user/username/' + username,
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user/username/' + username,
       {
         method: 'get',
         credentials: 'include',
@@ -29,7 +29,7 @@ export class UserServiceClient {
       username: username,
       password: password
     };
-    return fetch('http://localhost:4000/api/login', {
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/login', {
       method: 'post',
       body: JSON.stringify(credentials),
       credentials: 'include',
@@ -40,14 +40,14 @@ export class UserServiceClient {
   }
 
   logout() {
-    return fetch('http://localhost:4000/api/logout', {
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/logout', {
       method: 'post',
       credentials: 'include'
     });
   }
 
   profile() {
-    return fetch('http://localhost:4000/api/profile',
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/profile',
       {
         credentials: 'include', // include, same-origin, *omit
       })
@@ -63,7 +63,7 @@ export class UserServiceClient {
       username: username,
       password: password
     };
-    return fetch('http://localhost:4000/api/user', {
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user', {
       body: JSON.stringify(user),
       credentials: 'include', // include, same-origin, *omit
       method: 'post',
@@ -74,7 +74,7 @@ export class UserServiceClient {
   }
 
   updateUser(userId, user) {
-    return fetch('http://localhost:4000/api/user/' + userId, {
+    return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user/' + userId, {
       method: 'put',
       body: JSON.stringify(user),
       credentials: 'include',

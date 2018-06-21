@@ -1,22 +1,23 @@
 export class CourseNavigatorServiceClient {
   findAllCourses() {
-    return fetch('http://localhost:8080/api/course')
+    return fetch('https://kt-course-manager-server.herokuapp.com/api/course')
       .then(response => response.json());
   }
   findAllModulesForCourse(courseId) {
-    return fetch('http://localhost:8080/api/course/' + courseId + '/module')
+    return fetch('https://kt-course-manager-server.herokuapp.com/api/course/' + courseId + '/module')
       .then(response => response.json());
   }
   findAllLessonsForModule(courseId, moduleId) {
-    return fetch('http://localhost:8080/api/course/' + courseId + '/module/' + moduleId + '/lesson')
+    return fetch('https://kt-course-manager-server.herokuapp.com/api/course/' + courseId + '/module/' + moduleId + '/lesson')
       .then(response => response.json());
   }
   findAllTopicsForLesson(courseId, moduleId, lessonId) {
-    return fetch('http://localhost:8080/api/course/' + courseId + '/module/' + moduleId + '/lesson/' + lessonId + '/topic')
+    return fetch('https://kt-course-manager-server.herokuapp.com/api/course/' + courseId + '/module/' + moduleId +
+      '/lesson/' + lessonId + '/topic')
       .then(response => response.json());
   }
   findAllWidgetsForTopic(courseId, moduleId, lessonId, topicId) {
-    return fetch('http://localhost:8080/api/topic/' + topicId + '/widget')
+    return fetch('https://kt-course-manager-server.herokuapp.com/api/topic/' + topicId + '/widget')
       .then(response => response.json());
   }
 }
