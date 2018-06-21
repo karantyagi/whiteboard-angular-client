@@ -41,7 +41,7 @@ module.exports = ".list-group-item.active {\r\n  z-index: 2;\r\n  color: #fff;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-md navbar-light\" style=\"background-color: #e3f2fd;\">\n  <!--<a class=\"navbar-brand\" href=\"#\">White-Board</a>-->\n  <a class=\"navbar-brand\" href=\"#\" style=\"color: #007bff; font-size: x-large\">WhiteBoard</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\"\n          aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/home\">Home</a>\n      </li>\n      <li class=\"nav-item\" [hidden]=!loggedIn>\n        <a class=\"nav-link\" routerLink=\"/profile\">Profile</a>\n      </li>\n      <li class=\"nav-item\" [hidden]=!loggedIn>\n        <a class=\"nav-link\" [hidden]=!admin\n           routerLink=\"/admin\">Admin</a>\n      </li>\n    </ul>\n    <!--<form class=\"form-inline my-2 my-lg-0\">-->\n    <form class=\"form-inline mt-2 mt-md-0\">\n      <span class=\"navbar-text\">\n        Logged in as : </span>\n      <span style=\"color: dimgrey; font-weight: bold\">&nbsp;{{username}}\n      </span>\n      &nbsp;&nbsp;\n      <button class=\"btn btn-outline-primary my-2 my-sm-0\"\n              (click)=\"logout()\">Logout\n      </button>\n    </form>\n  </div>\n</nav>\n\n<div style=\"margin: 5px; padding: 15px;\">\n  <div class=\"row\">\n    <div class=\"col mr-0\">\n      <ul class=\"list-group rounded py-1 my-1\" style=\"width: 18rem\">\n        <li *ngFor=\"let course of courses\"\n            class=\"list-group-item shadow rounded my-2\"\n            (click)=\"selectCourse(course.id)\"\n            [ngClass]=\"{'active': course.id === selectedCourseId}\">\n          <span style=\"font-size: large; color:dodgerblue;\"> </span>{{course.title}}\n          <!--<button class=\"float-right btn btn-outline-primary float-right\"-->\n          <!--routerLink=\"/course/{{course.id}}/section\">View Sections</button>-->\n          <!--(click)=\"showSections(section)\"-->\n        </li>\n      </ul>\n    </div>\n    <div class=\"col-8 ml-0\">\n      <!--<h3 class=\"mb-1 text-center\" style=\"color: dimgray;\"> Section Editor</h3>-->\n      <div style=\"padding: 10px;\">\n        <h2 style=\"color: darkorange\" class=\"text-center\">Sections</h2>\n        <div [hidden]=!admin>\n          <div class=\"row ml-1 mb-2\">\n            <button [hidden]=addMode\n                    [disabled] = updateMode\n                    (click)=\"addSection()\"\n                    class=\"float-right btn btn-outline-warning rounded shadow\">\n              <i class=\"fas fa-plus\"></i>&nbsp;&nbsp;Add new section\n            </button>\n\n          </div>\n          <h4 [hidden]=!updateMode class=\"text-center p-0 mb-2\" style=\"color: limegreen\">Edit this section</h4>\n          <div [hidden] = !updateMode>\n          <form>\n\n            <div class=\"form-group row\">\n              <label for=\"sectionFld1\" class=\"text-center col-form-label\"  style=\"width:15%\">\n                Section Name </label>\n              <div class=\"col-sm-10\">\n                <input [ngModelOptions]=\"{standalone: true}\"\n                       [(ngModel)]=\"sectionName\"\n                       id=\"sectionFld1\"\n                       class=\"form-control wbdv-password-fld\"\n                       placeholder=\"Section Name\">\n              </div>\n            </div>\n\n            <div class=\"form-group row\">\n              <label for=\"seatsFld2\" class=\"text-center col-form-label\" style=\"width:15%\">\n                Max Seats</label>\n              <div class=\"col-sm-10\">\n                <input [ngModelOptions]=\"{standalone: true}\"\n                       [(ngModel)]=\"maxSeats\"\n                       id=\"seatsFld2\"\n                       class=\"form-control wbdv-password-fld\"\n                       placeholder=\"Max Seats in section\">\n              </div>\n            </div>\n            <button id=\"updateBtn\"\n                    [hidden] = !updateMode\n                    (click)=\"updateSection()\"\n                    class=\"btn btn-success\"\n                    style=\"margin-left:0%; width: 100%;\">\n              Update Section\n            </button>\n            <button id=\"cancelUpdateBtn\"\n                    [hidden]=!updateMode\n                    (click)=\"cancelUpdateMode()\"\n                    class=\"btn btn-secondary mt-2 mb-3\"\n                    style=\"margin-left:0%; width: 100%;\">\n              Cancel\n            </button>\n          </form>\n          </div>\n\n\n          <div [hidden]=!addMode class=\"mb-3\">\n            <form>\n\n              <div class=\"form-group row\">\n                <label for=\"sectionFld\" class=\"text-center col-form-label\" style=\"width:15%\">\n                  Section Name </label>\n                <div class=\"col-sm-10\">\n                  <input [ngModelOptions]=\"{standalone: true}\"\n                         [(ngModel)]=\"sectionName\"\n                         id=\"sectionFld\"\n                         class=\"form-control wbdv-password-fld\"\n                         placeholder=\"Section Name\">\n                </div>\n              </div>\n\n              <div class=\"form-group row\">\n                <label for=\"seatsFld\" class=\"text-center col-form-label\" style=\"width:15%\">\n                  Max Seats </label>\n                <div class=\"col-sm-10\">\n                  <input [ngModelOptions]=\"{standalone: true}\"\n                         [(ngModel)]=\"maxSeats\"\n                         id=\"seatsFld\"\n                         class=\"form-control wbdv-password-fld\"\n                         placeholder=\"Max Seats in section\">\n                </div>\n              </div>\n              <button id=\"createBtn\"\n                      [hidden]=updateMode\n                      (click)=\"createSection(sectionName, maxSeats)\"\n                      class=\"btn\"\n                      style=\"margin-left:0%; width: 100%; color: white; background-color: orange\">\n                Add Section\n              </button>\n              <button id=\"cancelBtn\"\n                      [hidden]=updateMode\n                      (click)=\"cancel()\"\n                      class=\"btn btn-secondary mt-2\"\n                      style=\"margin-left:0%; width: 100%;\">\n                Cancel\n              </button>\n            </form>\n          </div>\n          <ul class=\"list-group rounded py-1 my-1\" style=\"width: 36rem\">\n            <li *ngFor=\"let section of sections\" class=\"list-group-item shadow bg-light\">\n              <span style=\"font-size: large; color:dodgerblue;\"> </span>{{section.name}}\n              <button (click)=\"deleteSection(section)\"\n                      class=\"float-right btn btn-outline-danger float-right mt-2\">\n                <i class=\"fas fa-trash-alt\"></i></button>\n              <button (click)=\"editSection(section)\"\n                      class=\"float-right btn btn-outline-success float-right mt-2 mr-2\">\n                <i class=\"fas fa-pencil-alt\"></i></button>\n              <br>\n              <span style=\"color: dimgrey; font-style: italic \"> Max Seats :  </span>\n              {{section.maxSeats}}\n              <span style=\"color: dimgrey; font-style: italic \">&nbsp;&nbsp;|&nbsp;&nbsp; Seats Available :  </span>\n              {{section.seats}}\n            </li>\n          </ul>\n          <br>\n\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<nav class=\"navbar navbar-expand-md navbar-light\" style=\"background-color: #e3f2fd;\">\n  <!--<a class=\"navbar-brand\" href=\"#\">White-Board</a>-->\n  <a class=\"navbar-brand\" href=\"#\" style=\"color: #007bff; font-size: x-large\">WhiteBoard</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\"\n          aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/home\">Home</a>\n      </li>\n      <li class=\"nav-item\" [hidden]=!loggedIn>\n        <a class=\"nav-link\" routerLink=\"/profile\">Profile</a>\n      </li>\n      <li class=\"nav-item\" [hidden]=!loggedIn>\n        <a class=\"nav-link\" [hidden]=!admin\n           routerLink=\"/admin\">Admin</a>\n      </li>\n    </ul>\n    <!--<form class=\"form-inline my-2 my-lg-0\">-->\n    <form class=\"form-inline mt-2 mt-md-0\">\n      <span class=\"navbar-text\">\n        Logged in as : </span>\n      <span style=\"color: dimgrey; font-weight: bold\">&nbsp;{{username}}\n      </span>\n      &nbsp;&nbsp;\n      <button class=\"btn btn-outline-primary my-2 my-sm-0\"\n              (click)=\"logout()\">Logout\n      </button>\n    </form>\n  </div>\n</nav>\n\n<div style=\"margin: 5px; padding: 15px;\">\n  <div class=\"row\">\n    <div class=\"col mr-0\">\n      <ul class=\"list-group rounded py-1 my-1\" style=\"width: 18rem\">\n        <li *ngFor=\"let course of courses\"\n            class=\"list-group-item shadow rounded my-2\"\n            (click)=\"selectCourse(course.id, course.title)\"\n            [ngClass]=\"{'active': course.id === selectedCourseId}\">\n          <span style=\"font-size: large; color:dodgerblue;\"> </span>{{course.title}}\n          <!--<button class=\"float-right btn btn-outline-primary float-right\"-->\n          <!--routerLink=\"/course/{{course.id}}/section\">View Sections</button>-->\n          <!--(click)=\"showSections(section)\"-->\n        </li>\n      </ul>\n    </div>\n    <div class=\"col-8 ml-0\">\n      <!--<h3 class=\"mb-1 text-center\" style=\"color: dimgray;\"> Section Editor</h3>-->\n      <div style=\"padding: 10px;\">\n        <h2 style=\"color: darkorange\" class=\"text-center\">Sections</h2>\n        <div [hidden]=!admin>\n          <div class=\"row ml-1 mb-2\">\n            <button [hidden]=addMode\n                    [disabled] = updateMode\n                    (click)=\"addSection()\"\n                    class=\"float-right btn btn-outline-warning rounded shadow\">\n              <i class=\"fas fa-plus\"></i>&nbsp;&nbsp;Add new section\n            </button>\n\n          </div>\n          <h4 [hidden]=!updateMode class=\"text-center p-0 mb-2\" style=\"color: limegreen\">Edit this section</h4>\n          <div [hidden] = !updateMode>\n          <form>\n\n            <div class=\"form-group row\">\n              <label for=\"sectionFld1\" class=\"text-center col-form-label\"  style=\"width:15%\">\n                Section Name </label>\n              <div class=\"col-sm-10\">\n                <input [ngModelOptions]=\"{standalone: true}\"\n                       [(ngModel)]=\"sectionName\"\n                       id=\"sectionFld1\"\n                       class=\"form-control wbdv-password-fld\"\n                       placeholder=\"Section Name\">\n              </div>\n            </div>\n\n            <div class=\"form-group row\">\n              <label for=\"seatsFld2\" class=\"text-center col-form-label\" style=\"width:15%\">\n                Max Seats</label>\n              <div class=\"col-sm-10\">\n                <input [ngModelOptions]=\"{standalone: true}\"\n                       [(ngModel)]=\"maxSeats\"\n                       id=\"seatsFld2\"\n                       class=\"form-control wbdv-password-fld\"\n                       placeholder=\"Max Seats in section\">\n              </div>\n            </div>\n            <button id=\"updateBtn\"\n                    [hidden] = !updateMode\n                    (click)=\"updateSection()\"\n                    class=\"btn btn-success\"\n                    style=\"margin-left:0%; width: 100%;\">\n              Update Section\n            </button>\n            <button id=\"cancelUpdateBtn\"\n                    [hidden]=!updateMode\n                    (click)=\"cancelUpdateMode()\"\n                    class=\"btn btn-secondary mt-2 mb-3\"\n                    style=\"margin-left:0%; width: 100%;\">\n              Cancel\n            </button>\n          </form>\n          </div>\n\n\n          <div [hidden]=!addMode class=\"mb-3\">\n            <form>\n\n              <div class=\"form-group row\">\n                <label for=\"sectionFld\" class=\"text-center col-form-label\" style=\"width:15%\">\n                  Section Name </label>\n                <div class=\"col-sm-10\">\n                  <input [ngModelOptions]=\"{standalone: true}\"\n                         [(ngModel)]=\"sectionName\"\n                         id=\"sectionFld\"\n                         class=\"form-control wbdv-password-fld\"\n                         placeholder=\"Section Name\">\n                </div>\n              </div>\n\n              <div class=\"form-group row\">\n                <label for=\"seatsFld\" class=\"text-center col-form-label\" style=\"width:15%\">\n                  Max Seats </label>\n                <div class=\"col-sm-10\">\n                  <input [ngModelOptions]=\"{standalone: true}\"\n                         [(ngModel)]=\"maxSeats\"\n                         id=\"seatsFld\"\n                         class=\"form-control wbdv-password-fld\"\n                         placeholder=\"Max Seats in section\">\n                </div>\n              </div>\n              <button id=\"createBtn\"\n                      [hidden]=updateMode\n                      (click)=\"createSection(sectionName, maxSeats)\"\n                      class=\"btn\"\n                      style=\"margin-left:0%; width: 100%; color: white; background-color: orange\">\n                Add Section\n              </button>\n              <button id=\"cancelBtn\"\n                      [hidden]=updateMode\n                      (click)=\"cancel()\"\n                      class=\"btn btn-secondary mt-2\"\n                      style=\"margin-left:0%; width: 100%;\">\n                Cancel\n              </button>\n            </form>\n          </div>\n          <ul class=\"list-group rounded py-1 my-1\" style=\"width: 36rem\">\n            <li *ngFor=\"let section of sections\" class=\"list-group-item shadow bg-light\">\n              <span style=\"font-size: large; color:dodgerblue;\"> </span>{{section.name}}\n              <button (click)=\"deleteSection(section)\"\n                      class=\"float-right btn btn-outline-danger float-right mt-2\">\n                <i class=\"fas fa-trash-alt\"></i></button>\n              <button (click)=\"editSection(section)\"\n                      class=\"float-right btn btn-outline-success float-right mt-2 mr-2\">\n                <i class=\"fas fa-pencil-alt\"></i></button>\n              <br>\n              <span style=\"color: dimgrey; font-style: italic \"> Max Seats :  </span>\n              {{section.maxSeats}}\n              <span style=\"color: dimgrey; font-style: italic \">&nbsp;&nbsp;|&nbsp;&nbsp; Seats Available :  </span>\n              {{section.seats}}\n            </li>\n          </ul>\n          <br>\n\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -108,6 +108,7 @@ var AdminComponent = /** @class */ (function () {
     };
     AdminComponent.prototype.addSection = function () {
         this.addMode = true;
+        this.sectionName = this.selectedCourseTitle + ' Section 1';
     };
     AdminComponent.prototype.cancel = function () {
         this.addMode = false;
@@ -204,9 +205,10 @@ var AdminComponent = /** @class */ (function () {
             }
         }
     };
-    AdminComponent.prototype.selectCourse = function (id) {
+    AdminComponent.prototype.selectCourse = function (id, title) {
         var _this = this;
         this.selectedCourseId = id;
+        this.selectedCourseTitle = title;
         this.sectionService
             .findSectionsForCourse(this.selectedCourseId)
             .then(function (sections) { return _this.sections = sections; });
@@ -229,6 +231,7 @@ var AdminComponent = /** @class */ (function () {
             .then(function (courses) {
             _this.courses = courses;
             _this.selectedCourseId = _this.courses[0].id;
+            _this.selectedCourseTitle = _this.courses[0].title;
             _this.sectionService
                 .findSectionsForCourse(_this.selectedCourseId)
                 .then(function (sections) { return _this.sections = sections; });
@@ -493,7 +496,7 @@ module.exports = ".card{\r\n  margin-bottom: 20px;\r\n}\r\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2 style=\"color: #0069d9;\">All Courses ({{courses.length}})</h2>\n<!--<br/>-->\n<div class=\"row pt-3\" >\n  <div *ngFor=\"let course of courses\" class=\"col-sm-3 \">\n    <div class=\"card rounded shadow\">\n      <div class=\"card-body\">\n        <h5 class=\"card-title\">{{course.title}}</h5>\n        <!--<p class=\"card-text\">Explore this course.</p>-->\n        <a routerLink=\"/course/{{course.id}}\" class=\"btn shadow btn-primary\">View Modules</a>\n        &nbsp;&nbsp;&nbsp;\n      </div>\n      <div class=\"card-footer text-muted\" [hidden] = admin>\n        <a routerLink=\"/course/{{course.id}}/section\"\n           class=\"btn btn-success shadow-lg\">Enroll</a>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n<h2 style=\"color: #0069d9;\">All Courses ({{courses.length}})</h2>\n<!--<br/>-->\n<div class=\"row pt-3\" >\n  <div *ngFor=\"let course of courses\" class=\"col-sm-3 \">\n    <div class=\"card rounded shadow\">\n      <div class=\"card-body\">\n        <h5 class=\"card-title\">{{course.title}}</h5>\n        <!--<p class=\"card-text\">Explore this course.</p>-->\n        <a routerLink=\"/course/{{course.id}}\" class=\"btn shadow btn-primary\">View Modules</a>\n        &nbsp;&nbsp;&nbsp;\n      </div>\n      <div class=\"card-footer text-muted\" [hidden] = admin>\n        <a routerLink=\"/course/{{course.id}}/section\"\n           class=\"btn btn-success shadow-lg\">Enroll</a>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -577,7 +580,7 @@ module.exports = ".list-group-item.active.course {\r\n  z-index: 2;\r\n  color: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "    <div class=\"row\">\n      <div class=\"col\">\n        <ul class=\"list-group shadow\">\n          <li class=\"list-group-item active\">\n            Courses</li>\n          <li class=\"list-group-item course\"\n              *ngFor=\"let course of courses\"\n              (click)=\"selectCourse(course.id)\"\n              [ngClass]=\"{'active': course.id === selectedCourseId}\">\n            {{course.title}}</li>\n        </ul>\n      </div>\n      <div class=\"col\">\n        <ul class=\"list-group shadow\">\n          <li class=\"list-group-item active\">\n            Modules</li>\n          <li class=\"list-group-item module\"\n              *ngFor=\"let module of modules\"\n              (click)=\"selectModule(module.id)\"\n              [ngClass]=\"{'active': module.id === selectedModuleId}\">\n            {{module.title}}\n          </li>\n        </ul>\n      </div>\n      <div class=\"col\">\n        <ul class=\"list-group shadow\">\n          <li class=\"list-group-item active\">\n            Lessons</li>\n          <li class=\"list-group-item lesson\"\n              *ngFor=\"let lesson of lessons\"\n              (click)=\"selectLesson(lesson.id)\"\n              [ngClass]=\"{'active': lesson.id === selectedLessonId}\">\n            {{lesson.title}}</li>\n        </ul>\n      </div>\n      <div class=\"col\">\n        <ul class=\"list-group shadow\">\n          <li class=\"list-group-item active\">\n            Topics</li>\n          <li class=\"list-group-item topic\"\n              *ngFor=\"let topic of topics\"\n              (click)=\"selectTopic(topic.id)\"\n              [ngClass]=\"{'active': topic.id === selectedTopicId}\">\n            {{topic.title}}</li>\n        </ul>\n      </div>\n      <div class=\"col\">\n        <ul class=\"list-group shadow\">\n          <li class=\"list-group-item active\">\n            Widgets</li>\n          <li class=\"list-group-item widget\"\n              *ngFor=\"let widget of widgets\"\n              (click)=\"selectWidget(widget.id)\"\n              [ngClass]=\"{'active': widget.id === selectedWidgetId}\">\n            {{widget.widgetType}}\n            <!--<br>-->\n            <!--Title: {{widget.title}}</li>-->\n        </ul>\n      </div>\n    </div>\n\n"
+module.exports = "<div class=\"row\">\n      <div class=\"col\">\n        <ul class=\"list-group shadow\">\n          <li class=\"list-group-item active\">\n            Courses</li>\n          <li class=\"list-group-item course\"\n              *ngFor=\"let course of courses\"\n              (click)=\"selectCourse(course.id)\"\n              [ngClass]=\"{'active': course.id === selectedCourseId}\">\n            {{course.title}}</li>\n        </ul>\n      </div>\n      <div class=\"col\">\n        <ul class=\"list-group shadow\">\n          <li class=\"list-group-item active\">\n            Modules</li>\n          <li class=\"list-group-item module\"\n              *ngFor=\"let module of modules\"\n              (click)=\"selectModule(module.id)\"\n              [ngClass]=\"{'active': module.id === selectedModuleId}\">\n            {{module.title}}\n          </li>\n        </ul>\n      </div>\n      <div class=\"col\">\n        <ul class=\"list-group shadow\">\n          <li class=\"list-group-item active\">\n            Lessons</li>\n          <li class=\"list-group-item lesson\"\n              *ngFor=\"let lesson of lessons\"\n              (click)=\"selectLesson(lesson.id)\"\n              [ngClass]=\"{'active': lesson.id === selectedLessonId}\">\n            {{lesson.title}}</li>\n        </ul>\n      </div>\n      <div class=\"col\">\n        <ul class=\"list-group shadow\">\n          <li class=\"list-group-item active\">\n            Topics</li>\n          <li class=\"list-group-item topic\"\n              *ngFor=\"let topic of topics\"\n              (click)=\"selectTopic(topic.id)\"\n              [ngClass]=\"{'active': topic.id === selectedTopicId}\">\n            {{topic.title}}</li>\n        </ul>\n      </div>\n      <div class=\"col\">\n        <ul class=\"list-group shadow\">\n          <li class=\"list-group-item active\">\n            Widgets</li>\n          <li class=\"list-group-item widget\"\n              *ngFor=\"let widget of widgets\"\n              (click)=\"selectWidget(widget.id)\"\n              [ngClass]=\"{'active': widget.id === selectedWidgetId}\">\n            {{widget.widgetType}}\n            <!--<br>-->\n            <!--Title: {{widget.title}}</li>-->\n        </ul>\n      </div>\n    </div>\n\n"
 
 /***/ }),
 
@@ -707,7 +710,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mr-1 ml-1 mt-0 p-3\">\n  <h2 style=\"color: #0069d9;\">{{course.title}}</h2>\n  <app-module-list></app-module-list>\n</div>\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light\" style=\"background-color: #e3f2fd;\">\n  <a class=\"navbar-brand\" href=\"#\" style=\"color: #007bff; font-size: x-large\">WhiteBoard</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarTogglerDemo\" aria-controls=\"navbarTogglerDemo\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarTogglerDemo\">\n    <ul class=\"navbar-nav mr-auto mt-2 mt-lg-0\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/home\">Home</a>\n      </li>\n      <li class=\"nav-item\" [hidden] = !loggedIn>\n        <a class=\"nav-link\" routerLink=\"/profile\">Profile</a>\n      </li>\n      <li class=\"nav-item\" [hidden] = !loggedIn>\n        <a class=\"nav-link\" [hidden] = !admin\n           routerLink=\"/admin\">Admin</a>\n      </li>\n    </ul>\n\n    <form [hidden]=!loggedIn\n          class=\"form-inline mt-2 mt-md-0\">\n      <span class=\"navbar-text\">\n      Logged in as : </span>\n      <span style=\"color: dimgrey; font-weight: bold\">&nbsp;{{username}}\n      </span>\n      &nbsp;&nbsp;\n      <button class=\"btn btn-outline-primary my-2 my-sm-0\"\n              (click)=\"logout()\">Logout\n      </button>\n    </form>\n\n\n    <form [hidden]=loggedIn\n          class=\"form-inline mt-2 mt-md-0\">\n\n      <button class=\"btn btn-outline-primary my-2 my-sm-0 mr-2\"\n              routerLink=\"/login\">&nbsp;Login&nbsp;\n      </button>\n\n      <button class=\"btn btn-outline-primary my-2 my-sm-0\"\n              routerLink=\"/register\">Register\n      </button>\n    </form>\n\n\n  </div>\n</nav>\n\n\n<div class=\"mr-1 ml-1 mt-0 p-3\">\n  <h2 style=\"color: #0069d9;\">{{course.title}}</h2>\n  <app-module-list></app-module-list>\n</div>\n"
 
 /***/ }),
 
@@ -725,6 +728,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_course_model_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../models/course.model.client */ "./src/app/models/course.model.client.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_course_service_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/course.service.client */ "./src/app/services/course.service.client.ts");
+/* harmony import */ var _services_user_service_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/user.service.client */ "./src/app/services/user.service.client.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -738,11 +742,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var CourseViewerComponent = /** @class */ (function () {
-    function CourseViewerComponent(service, route) {
+    function CourseViewerComponent(service, userService, route, router) {
         var _this = this;
         this.service = service;
+        this.userService = userService;
         this.route = route;
+        this.router = router;
+        this.admin = false;
+        this.loggedIn = false;
         this.course = new _models_course_model_client__WEBPACK_IMPORTED_MODULE_1__["Course"]();
         this.route.params.subscribe(function (params) { return _this.loadCourse(params['courseId']); });
     }
@@ -750,9 +759,33 @@ var CourseViewerComponent = /** @class */ (function () {
         var _this = this;
         // console.log(courseId);
         this.service.findCourseById(courseId)
-            .then(function (course) { return _this.course = course; });
+            .then(function (course) {
+            _this.course = course;
+            console.log('Course : ', _this.course);
+        });
+    };
+    CourseViewerComponent.prototype.logout = function () {
+        var _this = this;
+        this.userService
+            .logout()
+            .then(function () {
+            return _this.router.navigate(['login']);
+        });
     };
     CourseViewerComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.userService
+            .profile()
+            .then(function (user) {
+            console.log('logged in as : ', user);
+            _this.username = user.username;
+            if (_this.username !== 'No session maintained') {
+                _this.loggedIn = true;
+            }
+            if (_this.username === 'admin') {
+                _this.admin = true;
+            }
+        });
     };
     CourseViewerComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -761,7 +794,9 @@ var CourseViewerComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./course-viewer.component.css */ "./src/app/course-viewer/course-viewer.component.css")]
         }),
         __metadata("design:paramtypes", [_services_course_service_client__WEBPACK_IMPORTED_MODULE_3__["CourseServiceClient"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+            _services_user_service_client__WEBPACK_IMPORTED_MODULE_4__["UserServiceClient"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], CourseViewerComponent);
     return CourseViewerComponent;
 }());
@@ -1213,7 +1248,7 @@ module.exports = ".active.wbdv {\r\n  background-color: rgba(0, 170, 255, 0.65);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-3\">\n    <ul class=\"list-group rounded\">\n      <li class=\"list-group-item active\">Modules</li>\n      <li [ngClass]=\"{'active': module.id == moduleId}\" *ngFor=\"let module of modules\"\n          class=\"list-group-item wbdv\">\n        <a routerLink=\"/course/{{courseId}}/module/{{module.id}}\">\n          {{module.title}}</a>\n      </li>\n    </ul>\n  </div>\n  <div class=\"col-9\">\n    <app-lesson-tabs></app-lesson-tabs>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-3\">\n    <ul class=\"list-group rounded\">\n      <li class=\"list-group-item active\">Modules</li>\n      <li [ngClass]=\"{'active': module.id == moduleId}\" *ngFor=\"let module of modules\"\n          class=\"list-group-item wbdv\"\n      >\n        <a routerLink=\"/course/{{courseId}}/module/{{module.id}}\">\n          {{module.title}}</a>\n      </li>\n    </ul>\n  </div>\n  <div class=\"col-9\">\n    <app-lesson-tabs></app-lesson-tabs>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1247,13 +1282,13 @@ var ModuleListComponent = /** @class */ (function () {
         var _this = this;
         this.service = service;
         this.route = route;
-        this.courseId = 0;
-        this.moduleId = 0;
         this.modules = [];
         this.route.params.subscribe(function (params) { return _this.setParams(params); });
     }
     ModuleListComponent.prototype.setParams = function (params) {
+        // console.log('module params : ', params);
         this.courseId = params['courseId'];
+        // console.log('Course Id : ', this.courseId);
         this.moduleId = params['moduleId'];
         this.loadModules(this.courseId);
     };
@@ -1757,23 +1792,24 @@ var CourseNavigatorServiceClient = /** @class */ (function () {
     function CourseNavigatorServiceClient() {
     }
     CourseNavigatorServiceClient.prototype.findAllCourses = function () {
-        return fetch('http://localhost:8080/api/course')
+        return fetch('https://kt-course-manager-server.herokuapp.com/api/course')
             .then(function (response) { return response.json(); });
     };
     CourseNavigatorServiceClient.prototype.findAllModulesForCourse = function (courseId) {
-        return fetch('http://localhost:8080/api/course/' + courseId + '/module')
+        return fetch('https://kt-course-manager-server.herokuapp.com/api/course/' + courseId + '/module')
             .then(function (response) { return response.json(); });
     };
     CourseNavigatorServiceClient.prototype.findAllLessonsForModule = function (courseId, moduleId) {
-        return fetch('http://localhost:8080/api/course/' + courseId + '/module/' + moduleId + '/lesson')
+        return fetch('https://kt-course-manager-server.herokuapp.com/api/course/' + courseId + '/module/' + moduleId + '/lesson')
             .then(function (response) { return response.json(); });
     };
     CourseNavigatorServiceClient.prototype.findAllTopicsForLesson = function (courseId, moduleId, lessonId) {
-        return fetch('http://localhost:8080/api/course/' + courseId + '/module/' + moduleId + '/lesson/' + lessonId + '/topic')
+        return fetch('https://kt-course-manager-server.herokuapp.com/api/course/' + courseId + '/module/' + moduleId +
+            '/lesson/' + lessonId + '/topic')
             .then(function (response) { return response.json(); });
     };
     CourseNavigatorServiceClient.prototype.findAllWidgetsForTopic = function (courseId, moduleId, lessonId, topicId) {
-        return fetch('http://localhost:8080/api/topic/' + topicId + '/widget')
+        return fetch('https://kt-course-manager-server.herokuapp.com/api/topic/' + topicId + '/widget')
             .then(function (response) { return response.json(); });
     };
     return CourseNavigatorServiceClient;
@@ -1795,7 +1831,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CourseServiceClient", function() { return CourseServiceClient; });
 var CourseServiceClient = /** @class */ (function () {
     function CourseServiceClient() {
-        this.COURSE_URL = 'http://localhost:8080/api/course';
+        this.COURSE_URL = 'https://kt-course-manager-server.herokuapp.com/api/course';
     }
     CourseServiceClient.prototype.findAllCourses = function () {
         return fetch(this.COURSE_URL)
@@ -1826,7 +1862,7 @@ var LessonServiceClient = /** @class */ (function () {
     function LessonServiceClient() {
     }
     LessonServiceClient.prototype.findLessonsForModule = function (courseId, moduleId) {
-        return fetch('http://localhost:8080/api/course/' + courseId + '/module/' + moduleId + '/lesson')
+        return fetch('https://kt-course-manager-server.herokuapp.com/api/course/' + courseId + '/module/' + moduleId + '/lesson')
             .then(function (response) { return response.json(); });
     };
     return LessonServiceClient;
@@ -1848,7 +1884,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModuleServiceClient", function() { return ModuleServiceClient; });
 var ModuleServiceClient = /** @class */ (function () {
     function ModuleServiceClient() {
-        this.MODULE_URL = 'http://localhost:8080/api/course/COURSE_ID/module';
+        this.MODULE_URL = 'https://kt-course-manager-server.herokuapp.com/api/course/COURSE_ID/module';
     }
     ModuleServiceClient.prototype.findModulesForCourse = function (courseId) {
         return fetch(this.MODULE_URL.replace('COURSE_ID', courseId))
@@ -1963,7 +1999,8 @@ var TopicServiceClient = /** @class */ (function () {
     function TopicServiceClient() {
     }
     TopicServiceClient.prototype.findTopicsForLesson = function (courseId, moduleId, lessonId) {
-        return fetch('http://localhost:8080/api/course/' + courseId + '/module/' + moduleId + '/lesson/' + lessonId + '/topic')
+        return fetch('https://kt-course-manager-server.herokuapp.com/api/course/' + courseId +
+            '/module/' + moduleId + '/lesson/' + lessonId + '/topic')
             .then(function (response) { return response.json(); });
     };
     return TopicServiceClient;
@@ -1987,7 +2024,7 @@ var UserServiceClient = /** @class */ (function () {
     function UserServiceClient() {
     }
     UserServiceClient.prototype.findUserById = function (userId) {
-        return fetch('http://localhost:4000/api/user/' + userId, {
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user/' + userId, {
             method: 'get',
             credentials: 'include',
             headers: {
@@ -1998,7 +2035,7 @@ var UserServiceClient = /** @class */ (function () {
     };
     UserServiceClient.prototype.findUserByUsername = function (username) {
         console.log('username : ', username);
-        return fetch('http://localhost:4000/api/user/username/' + username, {
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user/username/' + username, {
             method: 'get',
             credentials: 'include',
             headers: {
@@ -2012,7 +2049,7 @@ var UserServiceClient = /** @class */ (function () {
             username: username,
             password: password
         };
-        return fetch('http://localhost:4000/api/login', {
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/login', {
             method: 'post',
             body: JSON.stringify(credentials),
             credentials: 'include',
@@ -2022,13 +2059,13 @@ var UserServiceClient = /** @class */ (function () {
         }).then(function (response) { return response.json(); });
     };
     UserServiceClient.prototype.logout = function () {
-        return fetch('http://localhost:4000/api/logout', {
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/logout', {
             method: 'post',
             credentials: 'include'
         });
     };
     UserServiceClient.prototype.profile = function () {
-        return fetch('http://localhost:4000/api/profile', {
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/profile', {
             credentials: 'include',
         })
             .then(function (response) {
@@ -2041,7 +2078,7 @@ var UserServiceClient = /** @class */ (function () {
             username: username,
             password: password
         };
-        return fetch('http://localhost:4000/api/user', {
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user', {
             body: JSON.stringify(user),
             credentials: 'include',
             method: 'post',
@@ -2051,7 +2088,7 @@ var UserServiceClient = /** @class */ (function () {
         });
     };
     UserServiceClient.prototype.updateUser = function (userId, user) {
-        return fetch('http://localhost:4000/api/user/' + userId, {
+        return fetch('https://kt-whiteboard-nodejs-server.herokuapp.com/api/user/' + userId, {
             method: 'put',
             body: JSON.stringify(user),
             credentials: 'include',
@@ -2081,7 +2118,7 @@ var WidgetServiceClient = /** @class */ (function () {
     function WidgetServiceClient() {
     }
     WidgetServiceClient.prototype.findWidgetsForLesson = function (topicId) {
-        return fetch('http://localhost:8080/api/topic/' + topicId + '/widget')
+        return fetch('https://kt-course-manager-server.herokuapp.com/api/topic/' + topicId + '/widget')
             .then(function (response) { return response.json(); });
     };
     return WidgetServiceClient;
@@ -2109,7 +2146,7 @@ module.exports = ".active.wbdv {\r\n  background-color: rgba(255, 120, 0, 0.85);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"nav nav-pills\">\n  <li *ngFor=\"let topic of topics\"\n    class=\"nav-item\">\n    <a class=\"nav-link wbdv\"\n       [ngClass]=\"{'active': topic.id == topicId}\"\n       routerLink=\"/course/{{courseId}}/module/{{moduleId}}/lesson/{{lessonId}}/topic/{{topic.id}}\">\n      {{topic.title}}\n    </a>\n  </li>\n</ul>\n<div class=\"border border-dark rounded shadow-sm mt-2 mb-3 p-2 bg-light\" >\n  <app-widget-list></app-widget-list>\n</div>\n"
+module.exports = "<ul class=\"nav nav-pills\">\n  <li *ngFor=\"let topic of topics\"\n    class=\"nav-item\">\n    <a class=\"nav-link wbdv\"\n       [ngClass]=\"{'active': topic.id == topicId}\"\n       routerLink=\"/course/{{courseId}}/module/{{moduleId}}/lesson/{{lessonId}}/topic/{{topic.id}}\">\n      {{topic.title}}\n    </a>\n  </li>\n</ul>\n<div class=\"mt-2 mb-3 p-2\" >\n  <app-widget-list></app-widget-list>\n</div>\n"
 
 /***/ }),
 
@@ -2294,7 +2331,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let widget of widgets\">\n  <div [ngSwitch]=\"widget.widgetType\">\n    <div *ngSwitchCase=\"'Heading'\">\n      <div [ngSwitch]=\"widget.size\">\n        <h1 *ngSwitchCase=\"'1'\">Heading Widget : <span style=\"color: orangered;\">{{widget.text}}</span></h1>\n        <h2 *ngSwitchCase=\"'2'\">Heading Widget : <span style=\"color: orangered;\">{{widget.text}}</span></h2>\n        <h3 *ngSwitchCase=\"'3'\">Heading Widget : <span style=\"color: orangered;\">{{widget.text}}</span></h3>\n        <h4 *ngSwitchCase=\"'4'\">Heading Widget : <span style=\"color: orangered;\">{{widget.text}}</span></h4>\n        <h5 *ngSwitchCase=\"'5'\">Heading Widget : <span style=\"color: orangered;\">{{widget.text}}</span></h5>\n        <h6 *ngSwitchCase=\"'6'\">Heading Widget : <span style=\"color: orangered;\">{{widget.text}}</span></h6>\n      </div>\n    </div>\n    <div *ngSwitchCase=\"'Link'\">\n      <a href=\"{{widget.href}}\">{{widget.text}}</a>\n    </div>\n    <div *ngSwitchCase=\"'Image'\">\n      <img src=\"{{widget.src}}\" alt=\"image\" class=\"shadow rounded card p-2\" height=\"250px\" />\n    </div>\n    <div *ngSwitchCase=\"'List'\">\n      <h4>List Widget</h4>\n      <ul class=\"list-group\">\n        <li class=\"list-group-item bg-light\"\n            *ngFor=\"let item of widget.listItems.split('\\n')\">\n          {{item}}\n        </li>\n      </ul>\n    </div>\n    <div *ngSwitchCase=\"'Exam'\">\n      <h2 style=\"color: #5a6268\">Exam Widget</h2>\n    </div>\n    <div *ngSwitchCase=\"'Assignment'\">\n      <h2 style=\"color: darkgreen\">Assignment Widget</h2>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div *ngFor=\"let widget of widgets\">\n  <div [ngSwitch]=\"widget.widgetType\">\n    <div *ngSwitchCase=\"'Heading'\">\n      <div [ngSwitch]=\"widget.size\">\n        <h1 *ngSwitchCase=\"'1'\">Heading Widget : <span style=\"color: orangered;\">{{widget.text}}</span></h1>\n        <h2 *ngSwitchCase=\"'2'\">Heading Widget : <span style=\"color: orangered;\">{{widget.text}}</span></h2>\n        <h3 *ngSwitchCase=\"'3'\">Heading Widget : <span style=\"color: orangered;\">{{widget.text}}</span></h3>\n        <h4 *ngSwitchCase=\"'4'\">Heading Widget : <span style=\"color: orangered;\">{{widget.text}}</span></h4>\n        <h5 *ngSwitchCase=\"'5'\">Heading Widget : <span style=\"color: orangered;\">{{widget.text}}</span></h5>\n        <h6 *ngSwitchCase=\"'6'\">Heading Widget : <span style=\"color: orangered;\">{{widget.text}}</span></h6>\n        <br/>\n      </div>\n    </div>\n    <div *ngSwitchCase=\"'Link'\">\n      <a href=\"{{widget.href}}\">{{widget.text}}</a>\n      <br/>\n    </div>\n    <div *ngSwitchCase=\"'Image'\">\n      <img src=\"{{widget.src}}\" alt=\"image\" class=\"shadow rounded card p-2\" height=\"250px\" />\n      <br/>\n    </div>\n    <div *ngSwitchCase=\"'List'\">\n      <h4>List Widget</h4>\n      <ul class=\"list-group\">\n        <li class=\"list-group-item bg-light\"\n            *ngFor=\"let item of widget.listItems.split('\\n')\">\n          {{item}}\n        </li>\n      </ul>\n      <br/>\n    </div>\n    <div *ngSwitchCase=\"'Exam'\">\n    </div>\n    <div *ngSwitchCase=\"'Assignment'\">\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
